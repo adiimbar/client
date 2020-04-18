@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   // 1. Member definition
   // 2. Parameter definition
   // 3. this.router = router
-  constructor(usersService : UserService, private router: Router) {
+  constructor(usersService: UserService, private router: Router) {
 //        this.userLoginDetails = new UserLoginDetails('', '');
       this.userLoginDetails = new UserLoginDetails();
       this.usersService = usersService;
@@ -56,9 +56,9 @@ export class LoginComponent implements OnInit {
 
   }
 
-  public signUp() {
+  // public signUp() {
     
-  }
+  // }
 
   ngOnInit() {
   }

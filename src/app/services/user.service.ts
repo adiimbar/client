@@ -12,7 +12,7 @@ import { UserLoginDetails } from '../models/UserLoginDetails';
 })
 export class UserService {
 
-    public userType : string;
+    public userType: string;
 
     // HttpClient injection (a class variable will be automatically created)
     constructor(private http: HttpClient) {
