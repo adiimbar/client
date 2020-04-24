@@ -6,7 +6,7 @@ import { LoginPanelComponent } from './components/login-panel/login-panel.compon
 // import { CustomerComponent } from './components/customer/customer.component';
 import { Page404Component } from './components/page404/page404.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
-import { MainComponent } from './components/main/main.component';
+import { MainPanelComponent } from './components/main-panel/main-panel.component';
 import { ProductsComponent } from './components/products/products.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { from } from 'rxjs';
@@ -14,12 +14,12 @@ import { from } from 'rxjs';
 const routes: Routes = [
   // { path: "home", component: LoginComponent },
 
-  { path: "", redirectTo: "home", pathMatch: "full" }, // pathMatch = התאמת המחרוזת הריקה לכלל הנתיב
+  { path: "", redirectTo: "main", pathMatch: "full" }, // pathMatch = התאמת המחרוזת הריקה לכלל הנתיב
   { path: "home", component: LoginPanelComponent },
   { path: "signin", component: SignInComponent },
 
   { path: "main",
-    component: MainComponent,
+    component: MainPanelComponent,
     children: [
       // { path: "", redirectTo: "/store" },
       { path: "products", component: ProductsComponent },

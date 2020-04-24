@@ -1,7 +1,16 @@
 
-<h2>products list</h2>
+<h2>nav menu</h2>
+
+
+
+
+
+
+
+<h2>product cards</h2>
+
 <ul>
-    <li *ngFor="let product of productsArr">
+    <li *ngFor="let product of products">
         {{ product.product_id }} {{product.product_name}} {{product.category_id}}, {{product.price}}, {{product.image_path}}
     </li>
 </ul>

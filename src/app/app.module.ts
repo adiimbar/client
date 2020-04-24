@@ -9,8 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationInterceptor } from './interceptors/AuthenticationInterceptor';
-import { UserService } from './services/user.service';
-import { ProductsService } from './services/products.service';
+// import { UserService } from './services/user.service';
+// import { ProductsService } from './services/products.service';
 
 
 // youtube #23 - Routing and Navigation
@@ -22,7 +22,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { MainComponent } from './components/main/main.component';
+import { MainPanelComponent } from './components/main-panel/main-panel.component';
 import { AboutComponent } from './components/about/about.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
 import { LoginPanelComponent } from './components/login-panel/login-panel.component';
@@ -30,6 +30,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { MyCartComponent } from './components/my-cart/my-cart.component';
 import { ProductsComponent } from './components/products/products.component';
 import { OrdersComponent } from './components/orders/orders.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -44,7 +45,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MenuComponent,
     RegisterComponent,
     AdminComponent,
-    MainComponent,
+    MainPanelComponent,
     AboutComponent,
     StoreInfoComponent,
     LoginPanelComponent,
@@ -66,8 +67,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   providers: [
-    UserService,
-    ProductsService,
+    // UserService,
+    // ProductsService,
 
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
 

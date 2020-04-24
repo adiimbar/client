@@ -1,4 +1,4 @@
-div {
+/* div {
     height: 100%;
 }
 
@@ -8,4 +8,8 @@ h1 {
     top: 50%;
     font-size: 40px;
     transform: translateY(-50%);
+} */
+
+div {
+    float: left;
 }
