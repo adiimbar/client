@@ -14,7 +14,7 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
   
   public getAllProducts(): Observable<Iproduct[]> {
-    console.log(this.http.get<Iproduct[]>(this.productsUrl));
+    // console.log(this.http.get<Iproduct[]>(this.productsUrl));
     return this.http.get<Iproduct[]>(this.productsUrl);
   }
 }

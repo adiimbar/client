@@ -2,14 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { UserLoginDetails } from 'src/app/models/UserLoginDetails';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import {FormControl, Validators} from '@angular/forms';
+
+// import { url } from ("src/app/styles/buttons.css");
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css',
+                // 'src/app/styles/buttons.css'
+              ]
 })
 
 export class LoginComponent implements OnInit {
+  hide = true;
 
   public userLoginDetails: UserLoginDetails;
   private usersService: UserService;
@@ -62,6 +68,17 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  email = new FormControl('', [Validators.required, Validators.email]);
+
+  getErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+
 
 }
 

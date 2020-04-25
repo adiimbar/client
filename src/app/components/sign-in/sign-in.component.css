@@ -1,11 +1,11 @@
-section {
+/* section {
     min-height: 100%;
     border: 2px solid black;
     background-color: deepskyblue;
     text-align: center;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: repeat(12, 1fr); /* 12 columns */
+    grid-template-columns: repeat(12, 1fr);
 }
 
 section > * {
@@ -16,11 +16,6 @@ section > * {
     grid-column: span 12;
 }
 
-/* .signInPanel-1, .signInPanel-2 {
-    grid-column: span 4;
-
-} */
-
 .signInPanel-1 {
     float: left;
-}
+} */

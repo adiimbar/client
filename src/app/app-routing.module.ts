@@ -14,7 +14,7 @@ import { from } from 'rxjs';
 const routes: Routes = [
   // { path: "home", component: LoginComponent },
 
-  { path: "", redirectTo: "main", pathMatch: "full" }, // pathMatch = התאמת המחרוזת הריקה לכלל הנתיב
+  { path: "", redirectTo: "home", pathMatch: "full" }, // pathMatch = התאמת המחרוזת הריקה לכלל הנתיב
   { path: "home", component: LoginPanelComponent },
   { path: "signin", component: SignInComponent },
 

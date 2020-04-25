@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MaterialModule } from './modules/material-module';
 
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -64,7 +66,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    MatNativeDateModule
   ],
   providers: [
     // UserService,

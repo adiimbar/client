@@ -22,28 +22,60 @@
 </div> -->
 
 
-<section>
-    <div class="signinContainer">
-
-        <form>
-            <div class="signInPanel-1">
-                <input type="number" placeholder="ID" name="username"><br>
-                <input type="email" placeholder="Email" name="username"><br>
-                <input type="password" placeholder="Password" name="password"><br>
-                <input type="password" placeholder="confirm Password" name="password"><br>
-            </div>
-
-            <!-- <div *ngIf=> -->
-            <div class="signInPanel-2">
-                <input type="text" placeholder="City" name="City"><br>
-                <input type="text" placeholder="Street" name="Street"><br>
-                <input type="text" placeholder="Name" name="Name"><br>
-                <input type="text" placeholder="Last Name" name="Last Name"><br>
-
-                <input type="button" (click)="submitSignUp()" value="submit" />
-            </div>
-
-        </form>
-
+<form class="example-form">
+    
+    <mat-form-field class="example-full-width">
+        <mat-label>ID</mat-label>
+        <input matInput type="text">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+        </button>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>confirm Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+        </button>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-label>City</mat-label>
+        <mat-select>
+            <mat-option value="option">Select</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Street</mat-label>
+        <input matInput type="text">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text">
+    </mat-form-field>
+    <br>
+    <div class="example-button-row">
+        <button mat-raised-button (click)="submitSignUp()" value="submit">submit</button>
     </div>
-</section>
+</form>
