@@ -22,8 +22,250 @@
 </div> -->
 
 
-<form class="example-form">
-    
+
+
+<form [formGroup]="registrationForm">
+  
+    <div>
+        <mat-form-field class="example-full-width">
+            <mat-label>ID Number</mat-label>
+            <input matInput formControlName="identificationNumber">
+            <mat-error *ngIf="!registrationForm.controls['identificationNumber'].valid && registrationForm.controls['identificationNumber'].touched">
+                {{ requiredAlert }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <!-- <input matInput formControlName="email" [errorStateMatcher]="matcher"> -->
+            <input matInput formControlName="email">
+            <mat-error *ngIf="!registrationForm.controls['email'].valid && registrationForm.controls['email'].touched">
+                {{ getErrorEmail() }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+            <!-- <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number</mat-hint> -->
+            <mat-error *ngIf="!registrationForm.controls['password'].valid && registrationForm.controls['password'].touched">
+                {{ getErrorPassword() }}
+            </mat-error>
+            <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button> -->
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Confirm password</mat-label>
+            <input matInput formControlName="confirmPassword" [type]="hide ? 'password' : 'text'"
+                [errorStateMatcher]="errorMatcher">
+            <mat-error *ngIf="registrationForm.hasError('passwordsDoNotMatch')">
+                Passwords do not match
+            </mat-error>
+            <!-- <mat-error *ngif="!registrationForm.controls['confirmPassword'].valid && registrationForm.controls['confirmPassword'].touched">
+                Passwords do not match {{ requiredAlert }}
+            </mat-error> -->
+            <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button> -->
+        </mat-form-field>
+        <div class="example-button-row">
+            <button mat-raised-button (click)="next()" [disabled]="!registrationForm.controls['identificationNumber'].valid || !registrationForm.controls['email'].valid || registrationForm.controls['password'].valid">Next</button>
+        </div>
+
+    </div>
+
+    <div>
+        <mat-form-field>
+            <mat-label>City</mat-label>
+            <mat-select formControlName="city">
+                <mat-option *ngFor="let city of cityOptions" value="city">{{city}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!registrationForm.controls['city'].valid && registrationForm.controls['city'].touched">
+                {{ requiredAlert }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Street</mat-label>
+            <input matInput formControlName="street" type="text">
+            <mat-error *ngIf="!registrationForm.controls['street'].valid && registrationForm.controls['street'].touched">
+                {{ requiredAlert }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" type="text">
+            <mat-error *ngIf="!registrationForm.controls['firstName'].valid && registrationForm.controls['firstName'].touched">
+                {{ requiredAlert }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" type="text">
+            <mat-error *ngIf="!registrationForm.controls['lastName'].valid && registrationForm.controls['lastName'].touched">
+                {{ requiredAlert }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <div class="example-button-row">
+            <button mat-raised-button (click)="submitSignUp()" type="submit">submit</button>
+        </div>
+
+    </div>
+
+        {{registrationForm.value | json}}
+
+  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form [formGroup]="profileForm">
+  
+    <label>
+      First Name:
+      <input type="text" formControlName="firstName">
+    </label>
+  
+    <label>
+      Last Name:
+      <input type="text" formControlName="lastName">
+    </label>
+  
+  </form>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div> -->
+    <!-- <form class="example-form" #userForm="ngForm" (ngSubmit)="onSubmit()"> -->
+        <!-- <form [formGrop]="registrationForm" class="example-form" #userForm="ngForm" (ngSubmit)="onSubmit()"> -->
+        <!-- <form [formGrop]="registrationForm" class="example-form" > -->
+    <!-- <form class="example-form" (ngSubmit)="onSubmit()"> -->
+
+
+        <!-- <mat-form-field class="example-full-width">
+            <mat-label>ID</mat-label>
+            <input matInput formControlName="identificationNumber" type="text">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label> -->
+            <!-- <input matInput formControlName="email" placeholder="pat@example.com" [formControl]="email" required> -->
+            <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+        <!-- </mat-form-field> -->
+        <!-- <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'"> -->
+            <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" -->
+                <!-- [attr.aria-pressed]="hide"> -->
+                <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+            <!-- </button> -->
+        <!-- </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>confirm Password</mat-label>
+            <input matInput formControlName="confirmPassword" [type]="hide ? 'password' : 'text'"> -->
+            <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" -->
+                <!-- [attr.aria-pressed]="hide"> -->
+                <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+            <!-- </button> -->
+        <!-- </mat-form-field> -->
+
+
+        <!-- <div>
+            <mat-form-field>
+                <mat-label>City</mat-label>
+                <mat-select formControlName="city">
+                    <mat-option *ngFor="let city of cityOptions" value="city">{{city}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width">
+                <mat-label>Street</mat-label>
+                <input matInput formControlName="street" type="text">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" type="text">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" type="text">
+            </mat-form-field>
+            <br>
+            <div class="example-button-row">
+                <button mat-raised-button (click)="submitSignUp()" type="submit">submit</button>
+            </div>
+        </div>
+    </form> -->
+    <!-- {{registrationForm.value | json}} -->
+<!-- </div> -->
+
+
+
+
+
+
+
+
+<!-- <form [formGrop]="registrationForm" class="example-form" #userForm="ngForm" (ngSubmit)="onSubmit()">
+
     <mat-form-field class="example-full-width">
         <mat-label>ID</mat-label>
         <input matInput type="text">
@@ -40,7 +282,7 @@
         <input matInput [type]="hide ? 'password' : 'text'">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
-            <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
     </mat-form-field>
     <br>
@@ -49,33 +291,36 @@
         <input matInput [type]="hide ? 'password' : 'text'">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
-            <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
     </mat-form-field>
-    <br>
-    <mat-form-field>
-        <mat-label>City</mat-label>
-        <mat-select>
-            <mat-option value="option">Select</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-        <mat-label>Street</mat-label>
-        <input matInput type="text">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-        <mat-label>First Name</mat-label>
-        <input matInput type="text">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-        <mat-label>Last Name</mat-label>
-        <input matInput type="text">
-    </mat-form-field>
-    <br>
-    <div class="example-button-row">
-        <button mat-raised-button (click)="submitSignUp()" value="submit">submit</button>
+
+
+    <div>
+        <mat-form-field>
+            <mat-label>City</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let city of cityOptions" value="city">{{city}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Street</mat-label>
+            <input matInput type="text">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>First Name</mat-label>
+            <input matInput type="text">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput type="text">
+        </mat-form-field>
+        <br>
+        <div class="example-button-row">
+            <button mat-raised-button (click)="submitSignUp()" type="submit">submit</button>
+        </div>
     </div>
-</form>
+</form> -->

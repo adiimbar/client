@@ -1,3 +1,46 @@
+
+<form [formGroup]="loginForm">
+  
+  <div>
+      <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <!-- <input matInput formControlName="email" [errorStateMatcher]="matcher"> -->
+          <input matInput formControlName="email" >
+          <mat-error *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].touched">
+              {{ getErrorEmail() }}
+          </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+          <!-- <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number</mat-hint> -->
+          <mat-error *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
+              {{ getErrorPassword() }}
+          </mat-error>
+          <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button> -->
+      </mat-form-field>
+      <br>
+      <div class="example-button-row">
+        <button mat-raised-button (click)="login()" value="Login">login</button>
+        <a mat-raised-button routerLink="/signin" type="button" >sing in</a>
+      </div>
+      <p>need to eliminate singin underline</p>
+
+  </div>
+
+      {{loginForm.value | json}}
+
+</form>
+
+
+
+
+
+
+
 <div class="loginContainer">
   
     <!-- <form>
@@ -8,37 +51,37 @@
 
     </form> -->
 
-    <form class="example-form">
+    <!-- <form class="example-form"> -->
         <!-- <mat-form-field class="example-full-width">
           <mat-label>Email</mat-label>
           <input matInput type="text" required>
         </mat-form-field> -->
 
-        <mat-form-field class="example-full-width">
+        <!-- <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
             <input matInput [formControl]="email" required>
             <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
       
-          <mat-form-field class="example-full-width">
+          <!-- <mat-form-field class="example-full-width">
             <mat-label>Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" required>
+            <input matInput [type]="hide ? 'password' : 'text'" required> -->
             <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button> -->
-          </mat-form-field>
+          <!-- </mat-form-field> -->
 
         <!-- <mat-form-field class="example-full-width">
           <mat-label>Password</mat-label>
           <input matInput type="password" required>
         </mat-form-field> -->
 
-        <div class="example-button-row">
+        <!-- <div class="example-button-row">
             <button mat-raised-button (click)="login()" value="Login">login</button>
             <a mat-raised-button routerLink="/signin" >sing in</a>
           </div>
-          <p>need to eliminate sing in underline</p>
-      </form>
+          <p>need to eliminate singin underline</p>
+      </form> -->
 
 
 

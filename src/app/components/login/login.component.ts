@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserLoginDetails } from 'src/app/models/UserLoginDetails';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
-import {FormControl, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { checkPassword } from 'src/app/validators/check-password.validator';
+
 
 // import { url } from ("src/app/styles/buttons.css");
 
@@ -15,6 +17,46 @@ import {FormControl, Validators} from '@angular/forms';
 })
 
 export class LoginComponent implements OnInit {
+
+  loginForm: FormGroup;
+  requiredAlert: string = 'field is required';
+
+
+  createForm() {
+    let emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    this.loginForm = this.fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.pattern(emailregex),
+      ]],
+      password: ['', [Validators.required, checkPassword]],
+    });
+  }
+
+
+  ngOnInit() {
+    this.createForm();
+  }
+
+  checkPassword(control) {
+    let enteredPassword = control.value
+    let passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+    return (!passwordCheck.test(enteredPassword) && enteredPassword) ? { 'requirements': true } : null;
+  }
+  
+  getErrorEmail() {
+    return this.loginForm.get('email').hasError('required') ? 'Field is required' :
+      this.loginForm.get('email').hasError('pattern') ? 'Not a valid email address' : '';
+        // this.loginForm.get('email').hasError('alreadyInUse') ? 'This email address is already in use' : '';
+  }
+
+  getErrorPassword() {
+    return this.loginForm.get('password').hasError('required') ? 'Field is required (at least eight characters, one uppercase letter and one number)' :
+      this.loginForm.get('password').hasError('requirements') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
+  }
+
+
   hide = true;
 
   public userLoginDetails: UserLoginDetails;
@@ -25,7 +67,7 @@ export class LoginComponent implements OnInit {
   // 1. Member definition
   // 2. Parameter definition
   // 3. this.router = router
-  constructor(usersService: UserService, private router: Router) {
+  constructor(usersService: UserService, private router: Router, private fb: FormBuilder) {
 //        this.userLoginDetails = new UserLoginDetails('', '');
       this.userLoginDetails = new UserLoginDetails();
       this.usersService = usersService;
@@ -66,18 +108,16 @@ export class LoginComponent implements OnInit {
     
   // }
 
-  ngOnInit() {
-  }
 
-  email = new FormControl('', [Validators.required, Validators.email]);
+  // email = new FormControl('', [Validators.required, Validators.email]);
 
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
-    }
+  // getErrorMessage() {
+  //   if (this.email.hasError('required')) {
+  //     return 'You must enter a value';
+  //   }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
-  }
+  //   return this.email.hasError('email') ? 'Not a valid email' : '';
+  // }
 
 
 }
