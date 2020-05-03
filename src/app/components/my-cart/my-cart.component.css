@@ -1,3 +1,8 @@
+.productImageClass {
+  max-width: 80px;
+  max-height: 80px;
+}
+
 /* table style */
 
 /* .example-container {

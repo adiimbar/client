@@ -13,7 +13,9 @@ export class MyCartComponent implements OnInit {
 
   cartItems: IcartItems[];
 
-  displayedColumns = ['product_id', 'products_price'];
+  // currency: string = '&#8362;';
+
+  displayedColumns = ['image_path', 'product_name', 'price', 'quantity', 'sum'];
   // transactions: Transaction[]
 
   constructor(private cartItemsService: CartItemsService, private cartService: CartService) { }

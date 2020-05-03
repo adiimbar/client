@@ -19,18 +19,20 @@
 </mat-toolbar>
 
 
-<mat-card class="example-card" *ngFor="let product of products">
+<mat-card class="example-card" *ngFor="let product of products" >
+  <a role="button" (click)="productDialog(this.product)">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <!-- <mat-card-title>Shiba Inu</mat-card-title> -->
       <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
     </mat-card-header>
-    <img mat-card-image src="{{product.image_path}}" alt="product Photo">
+    <img mat-card-image src="{{product.image_path}}" alt="product Photo" class="productImageClass">
+    <!-- <img mat-card-image src="../assets/productImages/noam_28-1_tara.png" alt="product Photo"> -->
     <mat-card-content>
       <p>
         {{product.product_name}}
         <br>
-        {{product.price}}
+        {{product.price}}&#8362;
 
       </p>
     </mat-card-content>
@@ -38,13 +40,14 @@
       <!-- <button mat-button>LIKE</button> -->
       <!-- <button mat-button>SHARE</button> -->
     </mat-card-actions>
+    </a>
   </mat-card>
 
 
 
 
-<ul>
+<!-- <ul>
     <li *ngFor="let product of products">
         {{ product.product_id }} {{product.product_name}} {{product.category_id}}, {{product.price}}, {{product.image_path}}
     </li>
-</ul>
+</ul> -->

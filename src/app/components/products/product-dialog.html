@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Favorite Animal</h1>
+<div mat-dialog-content>
+    <!-- need to add a closing button -->
+    <img mat-card-image src="{{data.image_path}}" id="product.product_id" alt="product Photo">
+
+    <!-- <mat-form-field> -->
+        <!-- <mat-label>Favorite Animal</mat-label> -->
+        <!-- <input matInput [(ngModel)]="data.animal"> -->
+      <!-- </mat-form-field> -->
+    
+</div>
+<div mat-dialog-actions>
+
+
+    <div class="stepper-input stepper__input">
+        <button class="mat-button toggle-less" (click)="toggleLess()">-
+          <!-- <img src="assets/minus.svg" [attr.alt]="ariaLabelLess" /> -->
+        </button>
+        <div class="stepper-input-field" name="range-value" aria-atomic="true" aria-live="polite" aria-relevant="all">
+          {{renderedValue}}
+        </div>
+        <button class="mat-button toggle-more" (click)="toggleMore()">+
+          <!-- <img src="assets/plus.svg" [attr.alt]="ariaLabelMore" /> -->
+        </button>
+      </div>
+
+
+
+    <!-- <div>
+        <button (click)="minus(quantityInput.value)" class="btn btn-default">-</button>
+        <input #quantityInput type="text" [value]="quantity" >
+        <button (click)="plus(quantityInput.value)" class="btn btn-default">+</button>
+    </div> -->
+    <button mat-button (click)="addToCart()">Add to cart</button>
+    <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+</div>
+  
