@@ -4,6 +4,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { IcartItems } from 'src/app/models/cart-items';
 import { Icart } from 'src/app/models/cart';
 
+
 @Component({
   selector: 'app-my-cart',
   templateUrl: './my-cart.component.html',
@@ -18,7 +19,7 @@ export class MyCartComponent implements OnInit {
   displayedColumns = ['image_path', 'product_name', 'price', 'quantity', 'sum'];
   // transactions: Transaction[]
 
-  constructor(private cartItemsService: CartItemsService, private cartService: CartService) { }
+  constructor(private cartItemsService: CartItemsService) { }
 
   ngOnInit(): void {
 
@@ -30,14 +31,16 @@ export class MyCartComponent implements OnInit {
     .subscribe(cartItem => this.cartItems = cartItem);
   }
 
-  /** Gets the total cost of all transactions. */
-  getTotalCost() {
-    // Moke
-    return 0;
-    // return this.cartItems.map(t => Number(t.products_price)).reduce((acc, value) => acc + value, 0);
+  getTotalCostOfItemsInCart() {
+    // the map operator throws an error
+    return this.cartItems.map(t => (Number(t.price)*Number(t.quantity))).reduce((acc, value) => acc + value, 0);
+    // return this.cartItems.forEach();
   }
 
-
+  placeOrder(cartItems) {
+    console.log('order was clicked');
+    console.log(cartItems);
+  }
 
 
 

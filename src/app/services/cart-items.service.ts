@@ -18,8 +18,8 @@ export class CartItemsService {
   constructor(private http: HttpClient) { }
 
   public getAllCartItems(): Observable<IcartItems[]> {
-    console.log("start getallcartitemscall");
-    console.log(this.cartItemsUrl);
+    // console.log("start getallcartitemscall");
+    console.log("service: cart-items, function: getAllCartItems, url: " + this.cartItemsUrl);
     console.log(this.http.get<IcartItems[]>(this.cartItemsUrl));
     return this.http.get<IcartItems[]>(this.cartItemsUrl);
   }

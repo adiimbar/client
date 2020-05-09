@@ -20,6 +20,16 @@ export class ProductsComponent implements OnInit {
 
   constructor(private productsService: ProductsService, public dialog: MatDialog) { }
 
+  // openDialog() {
+  //   console.log("dialog opend");
+  //   const dialogRef = this.dialog.open(ProductDialog);
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
+  // }
+
+
   ngOnInit() {
 
     this.getAllProducts();
@@ -39,7 +49,7 @@ export class ProductsComponent implements OnInit {
           category_id: product.category_id,
           price: product.price,
           image_path: product.image_path,
-          animal: 'panda'
+          // animal: 'panda'
         }
       });
 
@@ -61,7 +71,7 @@ export interface DialogData {
   image_path: string,
 
 
-  animal: 'panda' | 'unicorn' | 'lion';
+  // animal: 'panda' | 'unicorn' | 'lion';
 
 
 }
@@ -74,16 +84,13 @@ export interface DialogData {
 export class ProductDialog {
   // constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public dialog: MatDialog) {}
 
-  // quantity: number = 1;
-  // public quantityInput = 1;
 
   constructor(
     public dialogRef: MatDialogRef<ProductDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
 
-
-
+    // parameters for product quantity
   initialValue: number = 1;
   step: number = 1;
   min: number = 0;
@@ -101,7 +108,6 @@ export class ProductDialog {
 
   toggleMore = () => {
     if (this.step + this.value <= this.max) {
-      console.log('more clicked');
       this.value = this.value + this.step;
       this.renderedValue = this.value.toString();
     }
@@ -114,23 +120,16 @@ export class ProductDialog {
     }
   };
 
+  addToCart(addedProductData) {
+    console.log('add to cart was clicked');
+    console.log(addedProductData);
+    console.log('quantity taken from the component: ' + this.renderedValue);
 
 
-
-
-  // plus(quantity) {
-  //   console.log('plus clicked');
-  //   console.log(quantity);
-  //   quantity++;
-  // }
-
-  // minus(quantity) {
-  //   console.log('minus clicked');
-  //   quantity.value--;
-  // }
-
-  addToCart() {
-    console.log('add to cart was clicked')
+    // need to call a function that will set all the cart items in local storage
   }
 
+  cancelButton() {
+    this.dialogRef.close();
+  }
 }

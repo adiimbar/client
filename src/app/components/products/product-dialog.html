@@ -1,25 +1,35 @@
-<h1 mat-dialog-title>Favorite Animal</h1>
+<div class="dialog-container-style">
+<!-- <h1 mat-dialog-title>Favorite Animal</h1> -->
 <div mat-dialog-content>
+  <!-- <button mat-button mat-dialog-close>Cancel</button> -->
     <!-- need to add a closing button -->
-    <img mat-card-image src="{{data.image_path}}" id="product.product_id" alt="product Photo">
+    <img mat-card-image class="dialog-img-style" src="{{data.image_path}}" id="{{data.product_id}}" alt="product Photo">
 
+    <div> {{data.price}}&#8362; </div>
+    <div> {{data.product_name}} </div>
+    <div>need to add description</div>
     <!-- <mat-form-field> -->
         <!-- <mat-label>Favorite Animal</mat-label> -->
         <!-- <input matInput [(ngModel)]="data.animal"> -->
       <!-- </mat-form-field> -->
-    
+
 </div>
 <div mat-dialog-actions>
 
+  <button mat-button mat-dialog-close (click)="cancelButton()">Cancel</button>
+
+  <!-- <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions> -->
 
     <div class="stepper-input stepper__input">
-        <button class="mat-button toggle-less" (click)="toggleLess()">-
+        <button mat-raised-button class="mat-button toggle-less" (click)="toggleLess()">-
           <!-- <img src="assets/minus.svg" [attr.alt]="ariaLabelLess" /> -->
         </button>
-        <div class="stepper-input-field" name="range-value" aria-atomic="true" aria-live="polite" aria-relevant="all">
+        <span class="stepper-input-field" name="range-value" aria-atomic="true" aria-live="polite" aria-relevant="all">
           {{renderedValue}}
-        </div>
-        <button class="mat-button toggle-more" (click)="toggleMore()">+
+        </span>
+        <button mat-raised-button class="mat-button toggle-more" (click)="toggleMore()">+
           <!-- <img src="assets/plus.svg" [attr.alt]="ariaLabelMore" /> -->
         </button>
       </div>
@@ -31,7 +41,8 @@
         <input #quantityInput type="text" [value]="quantity" >
         <button (click)="plus(quantityInput.value)" class="btn btn-default">+</button>
     </div> -->
-    <button mat-button (click)="addToCart()">Add to cart</button>
+    <button mat-button (click)="addToCart(data)">Add to cart</button>
     <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
 </div>
   
+</div>
