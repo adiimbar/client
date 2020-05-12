@@ -1,11 +1,69 @@
-<p>admin works!</p>
+
+<form [formGroup]="registrationForm">
+
+    <div>
+        <mat-form-field>
+            <mat-label>Product name</mat-label>
+            <input matInput formControlName="productName" type="text">
+            <mat-error *ngIf="!registrationForm.controls['productName'].valid && registrationForm.controls['productName'].touched">
+                {{ requiredAlert }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Product price</mat-label>
+            <input matInput formControlName="productPrice" type="text">
+            <mat-error *ngIf="!registrationForm.controls['productPrice'].valid && registrationForm.controls['productPrice'].touched">
+                {{ requiredAlert }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+
+        <!-- <div style="text-align:center; margin-top: 100px; "><mat-card style="margin-top:10px; width: 50%;">   -->
+            <div style="text-align:center;">
+                <mat-card style="margin-top:10px; width: 50%; margin-left:25%;">  
+                    <mat-card-content>  
+                <ul>  
+                    <li *ngFor="let file of files">  
+                      <span id="file-label">  
+                          {{file.name}}
+                    </span> 
+                        <mat-progress-bar [value]="file.progress"></mat-progress-bar>                
+                    </li>  
+                    <br>
+                </ul>  
+            </mat-card-content>  
+            <mat-card-actions>  
+              <mat-icon>file_upload</mat-icon>
+                <button mat-button color="warn" (click)="onClick()">  
+                    Upload  
+                </button>  
+            </mat-card-actions>  
+          </mat-card>
+          <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*" style="display:none;" />
+        </div>
+
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categoryOptions" value="category">{{category}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!registrationForm.controls['category'].valid && registrationForm.controls['category'].touched">
+                {{ requiredAlert }}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <div class="example-button-row">
+            <button mat-raised-button (click)="saveproduct()" type="submit">Save</button>
+        </div>
+
+    </div>
+
+        {{registrationForm.value | json}}
+        <p style="color: red;">need to set validations feedback</p>
+
+  </form>
 
 
 
-<!-- <a router-link="admin/insert"  routerLinkActive="the-chosen-one">insert</a><br><br>
-<a router-link="admin/update"  routerLinkActive="the-chosen-one">update</a><br><br>
-<a router-link="admin/delete"  routerLinkActive="the-chosen-one">delete</a><br>
-
-
-The following router outlet provides a section where the child routing takes place:
-<router-outlet></router-outlet> -->

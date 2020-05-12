@@ -5,7 +5,11 @@
     </header> -->
 
     <!-- might need to change the aside - it shulde serve the admin as well -->
-    <aside>
+    <aside *ngIf="userType == 'ADMIN'">
+        <app-admin></app-admin>
+    </aside>
+
+    <aside *ngIf="userType == 'CUSTOMER'">
         <app-my-cart></app-my-cart>
     </aside>
 

@@ -11,6 +11,10 @@ import { Component, OnInit } from '@angular/core';
 export class MainPanelComponent implements OnInit {
 
   constructor() { }
+    // MOCK
+    // userType = 'CUSTOMER';
+    userType = 'ADMIN';
+
   // options: FormGroup;
 
   // constructor(fb: FormBuilder) {
@@ -23,6 +27,9 @@ export class MainPanelComponent implements OnInit {
  
 
   ngOnInit(): void {
+    // need to determine - userType
+    // at load out set it to CUTOMER (hard coded)
+    // and set it in the onInit 
   }
 
 }

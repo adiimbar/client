@@ -12,7 +12,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatStepperModule} from '@angular/material/stepper';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -30,7 +31,9 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatDatepickerModule,
     MatDialogModule,
     MatSidenavModule,
-    MatStepperModule
+    MatStepperModule,
+    MatProgressBarModule,
+    MatIconModule
   ]
 })
 export class MaterialModule {}

@@ -1,8 +1,8 @@
 <div class="dialog-container-style">
 <!-- <h1 mat-dialog-title>Favorite Animal</h1> -->
 <div mat-dialog-content>
-  <!-- <button mat-button mat-dialog-close>Cancel</button> -->
-    <!-- need to add a closing button -->
+    <button mat-button mat-dialog-close (click)="cancelButton()">Cancel</button>
+
     <img mat-card-image class="dialog-img-style" src="{{data.image_path}}" id="{{data.product_id}}" alt="product Photo">
 
     <div> {{data.price}}&#8362; </div>
@@ -15,12 +15,6 @@
 
 </div>
 <div mat-dialog-actions>
-
-  <button mat-button mat-dialog-close (click)="cancelButton()">Cancel</button>
-
-  <!-- <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Cancel</button>
-  </mat-dialog-actions> -->
 
     <div class="stepper-input stepper__input">
         <button mat-raised-button class="mat-button toggle-less" (click)="toggleLess()">-
