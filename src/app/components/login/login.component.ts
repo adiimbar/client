@@ -74,6 +74,14 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void{
+    if(this.loginForm.valid === true) {
+
+      this.userLoginDetails.email = this.loginForm.value.email;
+      this.userLoginDetails.password = this.loginForm.value.password;
+
+      console.log('console user Login Details: ' + this.userLoginDetails);
+      console.log(this.userLoginDetails);
+
       // Creating an observable object
       // It looks like an http request had been issued BUT IT DIDN'T
       const observable = this.usersService.login(this.userLoginDetails);
@@ -84,23 +92,29 @@ export class LoginComponent implements OnInit {
           console.log(successfulServerRequestData);                    
           
           sessionStorage.setItem("token", successfulServerRequestData.token+"");
+          this.usersService.userType = successfulServerRequestData.userType;
 
-          // if(successfulServerRequestData.userType == "CUSTOMER"){
-          //     this.router.navigate(["/customer"]);
-          // }
+          if(successfulServerRequestData.userType == "CUSTOMER"){
+              this.router.navigate(["/main/products"]);
+          }
 
           if(successfulServerRequestData.userType == "ADMIN"){
-              this.router.navigate(["/admin"]);
+              this.router.navigate(["/main/products"]);
           }
 
-          if(successfulServerRequestData.userType == "COMPANY"){
-              this.router.navigate(["/company"]);
-          }
       }, serverErrorResponse => { // Reaching here means that the server had failed
-                this.router.navigate(['/customer']);        
-                // serverErrorResponse is the object returned from the ExceptionsHandler
+          // this.router.navigate(["/home"]);
+        // serverErrorResponse is the object returned from the ExceptionsHandler
           alert("Error! Status: " + serverErrorResponse.status + ", Message: " + serverErrorResponse.message);            
       }); 
+
+    } 
+    else {
+      console.log(this.loginForm); 
+      // this.getErrorEmail()
+    }
+
+     
 
   }
 

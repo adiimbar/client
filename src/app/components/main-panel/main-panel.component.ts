@@ -12,8 +12,8 @@ export class MainPanelComponent implements OnInit {
 
   constructor() { }
     // MOCK
-    // userType = 'CUSTOMER';
-    userType = 'ADMIN';
+    userType = 'CUSTOMER';
+    // userType = 'ADMIN';
 
   // options: FormGroup;
 

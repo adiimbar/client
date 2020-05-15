@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, FormControl, Validators, FormGroupDirective, Ng
 import { PasswordCrossFieldValidator } from 'src/app/validators/password-cross-field.validator';
 import { checkPassword } from 'src/app/validators/check-password.validator';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { UserRegistrationDetails } from 'src/app/models/UserRegistrationDetails';
+import { UserService } from 'src/app/services/user.service';
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 // export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -20,13 +23,14 @@ class CrossFieldErrorMatcher implements ErrorStateMatcher {
 
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css']
 })
-export class SignInComponent implements OnInit {
+export class RegistrationComponent implements OnInit {
 
   registrationForm: FormGroup;
+  userRegistrationDetails: UserRegistrationDetails[];
   errorMatcher = new CrossFieldErrorMatcher();
   hide = true;
   requiredAlert: string = 'field is required';
@@ -51,7 +55,7 @@ export class SignInComponent implements OnInit {
   }, {validator: PasswordCrossFieldValidator});
 }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private usersService: UserService) { }
 
   ngOnInit() {
     this.createForm();
@@ -86,67 +90,20 @@ export class SignInComponent implements OnInit {
 
   submitSignUp() {
 
+    let user: UserRegistrationDetails = this.registrationForm.value;
+
+
+    this.usersService
+    .addUser(user)
+    .subscribe();
+    // .subscribe(user => this.userRegistrationDetails.push(user));
+
+
   }
 
-  onSubmit() {
-    // console.log(this.userModel);
-  }
-
-
-
-
-
-
-
-
-
-
-  // registrationForm: FormGroup;
-
-  // registrationForm = this.fb.group({
-  //   identificationNumber: [''],
-  //   email: [''],
-  //   password: [''],
-  //   confirmPassword: [''],
-  //   city: [''],
-  //   street: [''],
-  //   firstName: [''],
-  //   lastName: ['']
-  // });
-
-
-  // registrationForm = new FormGroup({
-  //   identificationNumber: new FormControl(''),
-  //   email: new FormControl(''),
-  //   password: new FormControl(''),
-  //   confirmPassword: new FormControl(''),
-  //   city: new FormControl(''),
-  //   street: new FormControl(''),
-  //   firstName: new FormControl(''),
-  //   lastName: new FormControl('')
-  // });
-
-
- 
-
-
-
-
-  // email = new FormControl('', [Validators.required, Validators.email]);
-
-  // getErrorMessage() {
-  //   if (this.email.hasError('required')) {
-  //     return 'You must enter a value';
-  //   }
-
-  //   return this.email.hasError('email') ? 'Not a valid email' : '';
+  // onSubmit() {
+  //   // console.log(this.userModel);
   // }
-
-
-  // private submitSignUp(): void{
-    
-  // }
-
 
 
 }

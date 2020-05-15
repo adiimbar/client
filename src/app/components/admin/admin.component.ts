@@ -4,6 +4,9 @@ import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { UploadService } from 'src/app/services/upload.service';
+import { ProductsService } from 'src/app/services/products.service';
+import { Iproduct } from 'src/app/models/product';
+// import { IaddProduct } from 'src/app/models/addProduct';
 
 
 @Component({
@@ -15,10 +18,12 @@ export class AdminComponent implements OnInit {
 
 
   registrationForm: FormGroup;
+  products: Iproduct[];
+  // addProduct: IaddProduct[];
   // errorMatcher = new CrossFieldErrorMatcher();
   // hide = true;
   requiredAlert: string = 'field is required';
-  categoryOptions = ['Milk & Eggs', 'Vegetables & Fruits', "Meat & Fish", "Wine & Drinks"];
+  categoryOptions = [{name: 'Milk & Eggs', value: 5}, {name: 'Vegetables & Fruits', value: 6}, {name: "Meat & Fish", value: 7}, {name: "Wine & Drinks", value: 9}];
 
    // Enables getting a reference to the dom element who's named #fileUpload
    @ViewChild("fileUpload", { static: false })
@@ -26,6 +31,8 @@ export class AdminComponent implements OnInit {
  
    public files = [];
    public uploadedImageName;
+   public formSwitchValue = "addProduct";
+  //  private productImagePath: string;
  
 
   createForm() {
@@ -34,25 +41,40 @@ export class AdminComponent implements OnInit {
       // productId: ['', [Validators.required]],
       productPrice: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.min(0)]],
       productImage: ['', [Validators.required]],
+      // productImage: ['', [Validators.required]],
       category: ['', [Validators.required]]
     });
   // }, {validator: PasswordCrossFieldValidator});
 }
 
-  constructor(private fb: FormBuilder, private uploadService: UploadService) { }
+  constructor(private fb: FormBuilder, private uploadService: UploadService, private productsService: ProductsService) { }
 
   ngOnInit() {
     this.createForm();
   }
 
   saveproduct() {
-    console.log('save button click');
-        // console.log();
-    this.registrationForm.value.productImage = 'asdf.png';
+    console.log(this.registrationForm.value);
+    let newProduct: Iproduct[] = this.registrationForm.value;
+
+    this.productsService
+      .addProduct(newProduct)
+      .subscribe();
+      // .subscribe(product => this.products.push(product));
+
   }
 
+  updateProduct() {
+    console.log('update product was clicked');
+  }
 
-
+  formSwitchButton() {
+    if(this.formSwitchValue == 'addProduct') {
+      this.formSwitchValue = 'updateProduct';
+    } else if(this.formSwitchValue == 'updateProduct') {
+      this.formSwitchValue = 'addProduct';
+    }
+  }
 
   onClick() {
     // Clearing the files from previous upload
@@ -99,7 +121,10 @@ export class AdminComponent implements OnInit {
       if (typeof (event) === 'object' && event.body) {
         console.log("Body : " + JSON.stringify(event.body));
         this.uploadedImageName = "http://localhost:3000/uploads/" + event.body.name;
-        this.registrationForm.value.productImage = event.body.name;
+        this.registrationForm.value.productImage = this.uploadedImageName;
+        // this.productImagePath = this.uploadedImageName;
+        // console.log(this.productImagePath);
+        console.log(this.registrationForm.value.productImage);
       }
     });
   }

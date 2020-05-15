@@ -22,13 +22,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { RegisterComponent } from './components/register/register.component';
+// import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { MainPanelComponent } from './components/main-panel/main-panel.component';
 import { AboutComponent } from './components/about/about.component';
 import { StoreInfoComponent } from './components/store-info/store-info.component';
 import { LoginPanelComponent } from './components/login-panel/login-panel.component';
-import { SignInComponent } from './components/sign-in/sign-in.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 import { MyCartComponent } from './components/my-cart/my-cart.component';
 import { ProductsComponent } from './components/products/products.component';
 import { OrdersComponent } from './components/orders/orders.component';
@@ -45,13 +45,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     LoginComponent,
     MenuComponent,
-    RegisterComponent,
+    // RegisterComponent,
     AdminComponent,
     MainPanelComponent,
     AboutComponent,
     StoreInfoComponent,
     LoginPanelComponent,
-    SignInComponent,
+    // SignInComponent,
+    RegistrationComponent,
     MyCartComponent,
     ProductsComponent,
     OrdersComponent,

@@ -58,11 +58,13 @@
         <br>
         <mat-form-field>
             <mat-label>Confirm password</mat-label>
-            <input matInput formControlName="confirmPassword" [type]="hide ? 'password' : 'text'"
-                [errorStateMatcher]="errorMatcher">
-            <mat-error *ngIf="registrationForm.hasError('passwordsDoNotMatch')">
+            <input matInput formControlName="confirmPassword" [type]="hide ? 'password' : 'text'">
+                <!-- [errorStateMatcher]="errorMatcher"> -->
+            <!-- <mat-error *ngIf="registrationForm.hasError('passwordsDoNotMatch')">
                 Passwords do not match
-            </mat-error>
+            </mat-error> -->
+
+            
             <!-- <mat-error *ngif="!registrationForm.controls['confirmPassword'].valid && registrationForm.controls['confirmPassword'].touched">
                 Passwords do not match {{ requiredAlert }}
             </mat-error> -->

@@ -143,9 +143,9 @@ export class ProductDialog {
   };
 
   addToCart(addedProductData) {
-    console.log('add to cart was clicked');
-    console.log(addedProductData);
-    console.log('quantity taken from the component: ' + this.renderedValue);
+    // console.log('add to cart was clicked');
+    // console.log(addedProductData);
+    // console.log('quantity taken from the component: ' + this.renderedValue);
 
     const addCartItemRequestObj = {
       product_id: addedProductData.product_id,
