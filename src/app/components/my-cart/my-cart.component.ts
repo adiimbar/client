@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 // import { CartService } from 'src/app/services/cart.service';
 import { IcartItem } from 'src/app/models/cart-items';
@@ -23,16 +24,17 @@ export class MyCartComponent implements OnInit {
   displayedColumns = ['image_path', 'product_name', 'price', 'quantity', 'sum'];
   // transactions: Transaction[]
 
-  constructor(private cartItemsService: CartItemsService) { }
+  constructor(private cartItemsService: CartItemsService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+  // ngOnInit(): void {
 
     this.getAllCartItems();
   }
 
   getAllCartItems(): void {
     this.cartItemsService.getAllCartItems()
-    .subscribe(cartItem => this.cartItems = cartItem);
+      .subscribe(cartItem => this.cartItems = cartItem);
   }
 
   getTotalCostOfItemsInCart() {
@@ -44,6 +46,10 @@ export class MyCartComponent implements OnInit {
   placeOrder(cartItems) {
     console.log('order was clicked');
     console.log(cartItems);
+
+    // moving to orders
+    this.router.navigate(["/orders"]);
+
   }
 
 }

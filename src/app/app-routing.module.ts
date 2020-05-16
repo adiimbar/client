@@ -11,6 +11,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { MainPanelComponent } from './components/main-panel/main-panel.component';
 import { ProductsComponent } from './components/products/products.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { OrdersPanelComponent }from './components/orders-panel/orders-panel.component';
 import { from } from 'rxjs';
 
 const routes: Routes = [
@@ -29,6 +30,14 @@ const routes: Routes = [
       { path: "order", component: OrdersComponent }
     ]
   },
+  { path: "orders",
+  component: OrdersPanelComponent,
+  // children: [
+  //   // { path: "", redirectTo: "/store" },
+  //   { path: "products", component: ProductsComponent },
+    // { path: "order", component: OrdersComponent }
+  // ]
+},
   
   
 

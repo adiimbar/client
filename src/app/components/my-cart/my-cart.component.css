@@ -1,3 +1,8 @@
+.cartHead {
+  background-color: blueviolet;
+  height: 10%;
+}
+
 .productImageClass {
   max-width: 60px;
   max-height: 70px;

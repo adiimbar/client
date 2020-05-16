@@ -6,7 +6,7 @@ import { Iproduct } from 'src/app/models/product';
 import { IcartItem } from 'src/app/models/cart-items';
 // import { IdialogData } from 'src/app/models/dialog-data';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Mock } from 'protractor/built/driverProviders';
+// import { Mock } from 'protractor/built/driverProviders';
 import { UploadService } from 'src/app/services/upload.service';
 
 
@@ -35,42 +35,17 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllProducts();
-    this.getProductImg();
+    // this.getProductImg();
   }
 
   getAllProducts(): void {
     this.productsService
-    .getAllProducts()
-    .subscribe(products => this.products = products);
+      .getAllProducts()
+      .subscribe(products => this.products = products);
   }
 
-  getProductImg() {
-    // need to get all images and set them in local storage
-  }
-
-  // // addCartItem(newCartItem) {
-  // addCartItem() {
-
-  //   // Mock
-  //   let mockedCartItem = {
-  //     product_id: 5,
-  //     product_name: 'milk',
-  //     // category_id: number,
-  //     price: 42,
-  //     image_path: '../assets/productImages/milk_3-1_tara.png',
-  //     quantity: 2
-
-  //     // product_id: 5,
-  //     // quantity: 3,
-  //     // price: 88,
-  //     // shopping_cart_id: 8
-  //   }
-
-  // this.cartItemsService
-  // .addCartItem(mockedCartItem)
-  // // .addCartItem(newCartItem)
-  // .subscribe(res => console.log(res));
-  // // need to pass the data to the cart table
+  // getProductImg() {
+  //   // need to get all images and set them in local storage
   // }
 
   productDialog(product) {
@@ -112,7 +87,7 @@ export class ProductDialog {
   // constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public dialog: MatDialog) {}
   constructor(public dialogRef: MatDialogRef<ProductDialog>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private cartItemsService: CartItemsService) {}
 
-    // parameters for product quantity
+  // parameters for product quantity
   initialValue: number = 1;
   step: number = 1;
   min: number = 0;
@@ -143,29 +118,20 @@ export class ProductDialog {
   };
 
   addToCart(addedProductData) {
-    // console.log('add to cart was clicked');
-    // console.log(addedProductData);
-    // console.log('quantity taken from the component: ' + this.renderedValue);
 
     const addCartItemRequestObj = {
       product_id: addedProductData.product_id,
       quantity: Number(this.renderedValue),
-      // Mock
-      shopping_cart_id: 8
-    }
+      }
 
     console.log(addCartItemRequestObj);
     this.cartItemsService
-    .addCartItem(addCartItemRequestObj)
-    // // .addCartItem(newCartItem)
-    .subscribe(res => console.log(res));
+      .addCartItem(addCartItemRequestObj)
+      // // .addCartItem(newCartItem)
+      .subscribe(res => console.log(res));
     // // need to pass the data to the cart table
 
-
-    // need to call a function that will set all the cart items in local storage
-
     this.dialogRef.close();
-    
   }
 
   cancelButton() {

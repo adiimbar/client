@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
       observable.subscribe(successfulServerRequestData => {
           console.log(successfulServerRequestData);                    
           
-          sessionStorage.setItem("token", successfulServerRequestData.token+"");
+          sessionStorage.setItem("token", "Bearer " + successfulServerRequestData.token+"");
           this.usersService.userType = successfulServerRequestData.userType;
 
           if(successfulServerRequestData.userType == "CUSTOMER"){

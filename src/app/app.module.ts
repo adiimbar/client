@@ -34,6 +34,8 @@ import { ProductsComponent } from './components/products/products.component';
 import { OrdersComponent } from './components/orders/orders.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OrdersPanelComponent } from './components/orders-panel/orders-panel.component';
+import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 
 
 
@@ -58,6 +60,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     OrdersComponent,
 
     routingComponents,
+
+    OrdersPanelComponent,
+
+    CartSummaryComponent,
 
 
   ],

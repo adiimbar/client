@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SuccessfulLoginServerResponse } from '../models/SuccessfulLoginServerResponse';
 import { UserLoginDetails } from '../models/UserLoginDetails';
 import { UserRegistrationDetails } from '../models/UserRegistrationDetails';
+
+const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    })
+  };
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +17,8 @@ import { UserRegistrationDetails } from '../models/UserRegistrationDetails';
 export class UserService {
 
     public userType: string;
+
+    private getUserUrl: string = '/api/users/me';
 
     constructor(private http: HttpClient) {
     }
@@ -25,5 +33,9 @@ export class UserService {
         
         return this.http.post<void>("http://localhost:3000/users", userRegistrationDetails);
     }
+
+    // public getUser(): Observable<userDetails[]> {
+    //     return this.http.get<userDetails[]>(this.getUserUrl, httpOptions);
+    //   }
 
 }

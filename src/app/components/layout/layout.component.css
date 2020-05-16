@@ -1,3 +1,8 @@
+header, footer {
+    grid-column: span 12;
+    background-color: deepskyblue;
+}
+
 section {
     min-height: 100%;
     border: 2px solid black;
@@ -13,10 +18,6 @@ section > * {
     border: 2px solid black;
 }
 
-header, footer {
-    grid-column: span 12;
-    background-color: deepskyblue;
-}
 
 main {
     grid-column: span 12;   

@@ -13,6 +13,7 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
   public getUserCart(): Observable<Icart[]> {
+    
     console.log(this.http.get<Icart[]>(this.cartUrl));
     return this.http.get<Icart[]>(this.cartUrl);
   }
