@@ -12,6 +12,7 @@ import { MainPanelComponent } from './components/main-panel/main-panel.component
 import { ProductsComponent } from './components/products/products.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrdersPanelComponent }from './components/orders-panel/orders-panel.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { from } from 'rxjs';
 
 const routes: Routes = [
@@ -20,16 +21,8 @@ const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" }, // pathMatch = התאמת המחרוזת הריקה לכלל הנתיב
   { path: "home", component: LoginPanelComponent },
   { path: "registration", component: RegistrationComponent },
-  // { path: "registration", component: SignInComponent },
-
-  { path: "store",
-    component: MainPanelComponent,
-    // children: [
-    //   // { path: "", redirectTo: "/store" },
-    //   { path: "products", component: ProductsComponent },
-    //   { path: "order", component: OrdersComponent }
-    // ]
-  },
+  { path: "store", component: MainPanelComponent},
+  { path: "admin", component: AdminPanelComponent},
   // { path: "main",
   //   component: MainPanelComponent,
   //   children: [

@@ -1,4 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
 import { Component, OnInit, Inject } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { CartItemsService } from 'src/app/services/cart-items.service';
@@ -19,6 +18,14 @@ export class ProductsComponent implements OnInit {
 
   products: Iproduct[];
   cartItem: IcartItem;
+  categoryOptions = [
+    {name: 'All products', value: null},
+    {name: 'Milk & Eggs', value: 5},
+    {name: 'Vegetables & Fruits', value: 6},
+    {name: "Meat & Fish", value: 7},
+    {name: "Wine & Drinks", value: 9}
+  ];
+
   // dialogData: IdialogData;
 
   // constructor(private productsService: ProductsService, private cartItemsService: CartItemsService, public dialog: MatDialog) { }
@@ -35,18 +42,19 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllProducts();
-    // this.getProductImg();
   }
 
-  getAllProducts(): void {
+  async getAllProducts() {
     this.productsService
       .getAllProducts()
       .subscribe(products => this.products = products);
   }
 
-  // getProductImg() {
-  //   // need to get all images and set them in local storage
-  // }
+  async getAllProductsByCategoryId(categoryId) {
+    this.productsService
+      .getAllProductsByCategoryId(categoryId)
+      .subscribe(products => this.products = products);
+  }
 
   productDialog(product) {
     console.log(product.image_path + 'was clickd');
@@ -64,6 +72,17 @@ export class ProductsComponent implements OnInit {
     //   console.log('The dialog was closed');
     //   this.animal = result;
     // });
+  }
+
+  categoryButton(categoryId) {
+
+    if(categoryId == null) {
+      this.getAllProducts();
+    }
+    else {
+      this.getAllProductsByCategoryId(categoryId)
+    }
+
   }
 
 }
@@ -84,7 +103,6 @@ export interface DialogData {
   styleUrls: ['./products.component.css']
 })
 export class ProductDialog {
-  // constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public dialog: MatDialog) {}
   constructor(public dialogRef: MatDialogRef<ProductDialog>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private cartItemsService: CartItemsService) {}
 
   // parameters for product quantity
@@ -103,6 +121,7 @@ export class ProductDialog {
     this.renderedValue = this.value.toString();
   }
 
+  // increase product quantity in popup window
   toggleMore = () => {
     if (this.step + this.value <= this.max) {
       this.value = this.value + this.step;
@@ -110,6 +129,7 @@ export class ProductDialog {
     }
   };
 
+  // decrease product quantity in popup window
   toggleLess = () => {
     if (this.value - this.step >= this.min) {
       this.value = this.value - this.step;
@@ -117,7 +137,7 @@ export class ProductDialog {
     }
   };
 
-  addToCart(addedProductData) {
+  async addToCart(addedProductData) {
 
     const addCartItemRequestObj = {
       product_id: addedProductData.product_id,
@@ -125,7 +145,7 @@ export class ProductDialog {
       }
 
     console.log(addCartItemRequestObj);
-    this.cartItemsService
+    await this.cartItemsService
       .addCartItem(addCartItemRequestObj)
       // // .addCartItem(newCartItem)
       .subscribe(res => console.log(res));

@@ -20,6 +20,11 @@ export class ProductsService {
     return this.http.get<Iproduct[]>(this.productsUrl);
   }
 
+  public getAllProductsByCategoryId(categoryId): Observable<Iproduct[]> {
+    // console.log(this.http.get<Iproduct[]>(this.getProductsUrl));
+    return this.http.get<Iproduct[]>(this.productsUrl + categoryId);
+  }
+
   public addProduct(product: Iproduct[]): Observable<Iproduct[]> {
     // console.log(this.http.get<Iproduct[]>(this.productsUrl));
     return this.http.post<Iproduct[]>(this.productsUrl, product);
