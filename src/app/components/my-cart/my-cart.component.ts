@@ -30,6 +30,10 @@ export class MyCartComponent implements OnInit {
   // ngOnInit(): void {
 
     this.getAllCartItems();
+
+    this.cartItemsService.needToRefetchSubject.subscribe((value) => {
+      if (value) this.getAllCartItems();
+    })
   }
 
   getAllCartItems(): void {

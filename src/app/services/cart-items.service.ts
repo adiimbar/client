@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { IcartItem } from '../models/cart-items';
 
 const httpOptions = {
@@ -13,11 +14,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CartItemsService {
-
+  needToRefetchSubject = new Subject();
   private cartItemsUrl: string = '/api/cartItems/allCartItems/';
   private addCartItemsUrl: string = '/api/cartItems';
   private deleteCartItemUrl: string = '/api/cartItems';
-  
+
 
   constructor(private http: HttpClient) { }
 
@@ -30,6 +31,9 @@ export class CartItemsService {
 
   addCartItem (cartItem: IcartItem): Observable<IcartItem> {
     return this.http.post<IcartItem>(this.addCartItemsUrl, cartItem, httpOptions)
+      .pipe(tap(() => {
+        this.needToRefetchSubject.next(true);
+      }));
       // .pipe(
       //   catchError(this.handleError('addCartItem', cartItem))
       // );
@@ -38,6 +42,9 @@ export class CartItemsService {
   deleteCartItem (productId: number): Observable<{}> {
     const url = `${this.deleteCartItemUrl}/${productId}`;
     return this.http.delete(url, httpOptions)
+      .pipe(tap(() => {
+        this.needToRefetchSubject.next(true);
+      }));
       // .pipe(
       //   catchError(this.handleError('deleteHero'))
       // );
