@@ -14,9 +14,6 @@ const httpOptions = {
 })
 export class CartItemsService {
 
-  // Mock
-  // private cartId: number = 8;
-
   private cartItemsUrl: string = "/api/cartItems/allCartItems/";
 
   private addCartItemsUrl: string = "/api/cartItems";

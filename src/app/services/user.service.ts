@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { SuccessfulLoginServerResponse } from '../models/SuccessfulLoginServerResponse';
 import { UserLoginDetails } from '../models/UserLoginDetails';
 import { UserRegistrationDetails } from '../models/UserRegistrationDetails';
+import { UserDetails } from 'src/app/models/UserDetails';
+
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -34,8 +36,8 @@ export class UserService {
         return this.http.post<void>("http://localhost:3000/users", userRegistrationDetails);
     }
 
-    // public getUser(): Observable<userDetails[]> {
-    //     return this.http.get<userDetails[]>(this.getUserUrl, httpOptions);
-    //   }
+    public getUser(): Observable<UserDetails[]> {
+        return this.http.get<UserDetails[]>(this.getUserUrl, httpOptions);
+      }
 
 }

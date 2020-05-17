@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
+// import { UserDetails } from 'src/app/models/UserDetails';
+import { OrdersService } from 'src/app/services/orders.service';
+import { OrderDetails } from 'src/app/models/OrderDetails';
 
 
 @Component({
@@ -10,16 +13,22 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class OrdersComponent implements OnInit {
 
+  // userDetails: UserDetails[];
+
+  // need to make city option global
+  cityOptions = ['Jerusalem', 'Tel Aviv', 'Haifa', 'Rishon LeZion', 'Petah Tikva', 'Ashdod', 'Netanya', "Be'er Sheva", 'Bnei Brak', 'Holon'];
 
   orderForm: FormGroup;
   requiredAlert: string = 'field is required';
   minDate: Date;
-  maxDate: Date;
+  maxDate: Date;  
 
+  public orderDetails: OrderDetails
 
   createForm() {
 
     this.orderForm = this.fb.group({
+      // city: [this.userDetails.city, [Validators.required]],
       city: ['', [Validators.required]],
       street: ['', [Validators.required]],
       shippingDate: ['', [Validators.required]],
@@ -27,15 +36,16 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  constructor(private fb: FormBuilder, private usersService: UserService) {
+  constructor(private fb: FormBuilder, private ordersService: OrdersService, private usersService: UserService) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 0, 0, 0);
     this.maxDate = new Date(currentYear + 1, 11, 31);
+    this.orderDetails = new OrderDetails();
   }
 
   ngOnInit() {
     // need to fetch userData from cache and fill the fileds
-    // await let useDetails = this.getUser();
+    // this.getUser();
     // this.createForm(useDetails);
     this.createForm();
   }
@@ -43,19 +53,42 @@ export class OrdersComponent implements OnInit {
   // getUser(): void {
   //   this.usersService
   //     .getUser()
-  //     // .subscribe(products => this.products = products);
+  //     .subscribe(user => this.userDetails = user);
   // }
 
 
-  // need to make city option global
-  cityOptions = ['Tel Aviv', 'Jerusalem', "Be'er Sheva"];
-  
+    // Prevent Saturday from being selected.  
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
-    // Prevent Saturday and Sunday from being selected.
     return day !== 6;
   }
 
-  orderClick() {}
+  orderClick() {
+
+    if (this.orderForm.valid) {
+      console.log(this.orderForm.valid);
+
+      this.orderDetails.city = this.orderForm.value.city;
+      this.orderDetails.street = this.orderForm.value.street;
+      this.orderDetails.shippingDate = this.orderForm.value.shippingDate;
+      this.orderDetails.creditCard = this.orderForm.value.creditCard;
+
+      console.log(this.orderDetails)
+
+
+      // // need to move the call
+      // //first need to make sure the user want to order
+      this.ordersService
+      .addOrder(this.orderDetails)
+      // // .addCartItem(newCartItem)
+      .subscribe(res => console.log(res));
+
+    }
+    else {
+      console.log('form not valid');
+    }
+
+    // console.log(this.userDetails.firstName);
+  }
 
 }

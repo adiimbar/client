@@ -1,1 +1,19 @@
-<p>cart-summary works!</p>
+<div>
+    <h2>Cart Summary</h2>
+</div>
+
+<div>
+    <button (click)="BackToCartButton()">Back to cart</button>
+</div>
+
+<div>
+    <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let cartItem of cartItems">
+            Product: {{cartItem.product_name}} | Quantity: {{cartItem.quantity}} | Price: {{cartItem.price * cartItem.quantity}}&#8362;
+        </mat-list-item>
+    </mat-list>
+</div>
+
+<div>
+    Total: &#8362;
+</div>

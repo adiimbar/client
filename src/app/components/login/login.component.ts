@@ -95,11 +95,11 @@ export class LoginComponent implements OnInit {
           this.usersService.userType = successfulServerRequestData.userType;
 
           if(successfulServerRequestData.userType == "CUSTOMER"){
-              this.router.navigate(["/main/products"]);
+              this.router.navigate(["/store"]);
           }
 
           if(successfulServerRequestData.userType == "ADMIN"){
-              this.router.navigate(["/main/products"]);
+              this.router.navigate(["/admin"]);
           }
 
       }, serverErrorResponse => { // Reaching here means that the server had failed

@@ -22,14 +22,23 @@ const routes: Routes = [
   { path: "registration", component: RegistrationComponent },
   // { path: "registration", component: SignInComponent },
 
-  { path: "main",
+  { path: "store",
     component: MainPanelComponent,
-    children: [
-      // { path: "", redirectTo: "/store" },
-      { path: "products", component: ProductsComponent },
-      { path: "order", component: OrdersComponent }
-    ]
+    // children: [
+    //   // { path: "", redirectTo: "/store" },
+    //   { path: "products", component: ProductsComponent },
+    //   { path: "order", component: OrdersComponent }
+    // ]
   },
+  // { path: "main",
+  //   component: MainPanelComponent,
+  //   children: [
+  //     // { path: "", redirectTo: "/store" },
+  //     { path: "products", component: ProductsComponent },
+  //     { path: "order", component: OrdersComponent }
+  //   ]
+  // },
+
   { path: "orders",
   component: OrdersPanelComponent,
   // children: [
