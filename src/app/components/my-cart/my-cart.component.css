@@ -1,6 +1,6 @@
 .cartHead {
   background-color: blueviolet;
-  height: 10%;
+  height: 64px !important;
 }
 
 .productImageClass {

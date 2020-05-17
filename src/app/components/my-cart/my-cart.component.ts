@@ -52,4 +52,17 @@ export class MyCartComponent implements OnInit {
 
   }
 
+  emptyCartButton() {
+
+  }
+
+  deleteItem(productId) {
+    console.log('product id to delete');
+    console.log(productId);
+
+    this.cartItemsService
+      .deleteCartItem(productId)
+      .subscribe();
+  }
+
 }

@@ -1,7 +1,10 @@
 <div class="dialog-container-style">
 
+  <div class="closingButtonDiv">
+    <a class="closingButton" (click)="cancelButton()" style="cursor: pointer;">&#10006;</a>
+  </div>
+
   <div mat-dialog-content>
-    <button mat-button mat-dialog-close (click)="cancelButton()">Cancel</button>
 
     <img mat-card-image class="dialog-img-style" src="{{data.image_path}}" id="{{data.product_id}}" alt="product Photo">
 

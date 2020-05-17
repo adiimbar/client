@@ -28,8 +28,7 @@ export class ProductsComponent implements OnInit {
 
   // dialogData: IdialogData;
 
-  // constructor(private productsService: ProductsService, private cartItemsService: CartItemsService, public dialog: MatDialog) { }
-  constructor(private productsService: ProductsService, private uploadService: UploadService, public dialog: MatDialog) { }
+  constructor(private productsService: ProductsService, private cartItemsService: CartItemsService, public dialog: MatDialog) { }
 
   // openDialog() {
   //   console.log("dialog opend");
@@ -57,8 +56,8 @@ export class ProductsComponent implements OnInit {
   }
 
   productDialog(product) {
-    console.log(product.image_path + 'was clickd');
-      this.dialog.open(ProductDialog, {
+
+    this.dialog.open(ProductDialog, {
         data: {
           product_id: product.product_id,
           product_name: product.product_name,
@@ -144,7 +143,7 @@ export class ProductDialog {
       quantity: Number(this.renderedValue),
       }
 
-    console.log(addCartItemRequestObj);
+    // console.log(addCartItemRequestObj);
     await this.cartItemsService
       .addCartItem(addCartItemRequestObj)
       // // .addCartItem(newCartItem)
