@@ -3,10 +3,20 @@
     <section>
         <div class="productsMenuDiv example-button-row">
           <button mat-button *ngFor="let category of categoryOptions" (click)="categoryButton(category.value)">{{category.name}}</button>
+          <!-- <form> -->
+            <span style="right: 10px;">
+              <input [(ngModel)]="itemSearchValue" type="text" placeholder="Search a product">
+              <button mat-button (click)="searchItemButton()">Search</button>
+            </span>
+          <!-- </form> -->
         </div>
     </section>
 
 </mat-toolbar>
+
+<div *ngIf="products.length == 0">
+  <h1>We didn't find matching products</h1>
+</div>
 
 <mat-card class="example-card" *ngFor="let product of products" >
     <a role="button" (click)="productDialog(this.product)">

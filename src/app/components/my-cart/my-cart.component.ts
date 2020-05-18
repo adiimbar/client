@@ -43,27 +43,24 @@ export class MyCartComponent implements OnInit {
 
   getTotalCostOfItemsInCart() {
     // the map operator throws an error
-    // return this.cartItems.map(t => (Number(t.price)*Number(t.quantity))).reduce((acc, value) => acc + value, 0);
+    // console.log(this.cartItems);
+    return this.cartItems.map(item => (Number(item.price)*Number(item.quantity))).reduce((acc, value) => acc + value, 0);
     // return this.cartItems.forEach();
   }
 
-  placeOrder(cartItems) {
-    console.log('order was clicked');
-    console.log(cartItems);
-
+  placeOrder() {
     // moving to orders
     this.router.navigate(["/orders"]);
 
   }
 
   emptyCartButton() {
-
+    this.cartItemsService
+      .emptyCartItems()
+      .subscribe();
   }
 
   deleteItem(productId) {
-    console.log('product id to delete');
-    console.log(productId);
-
     this.cartItemsService
       .deleteCartItem(productId)
       .subscribe();

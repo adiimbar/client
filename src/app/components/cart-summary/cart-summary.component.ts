@@ -12,16 +12,29 @@ import { IcartItem } from 'src/app/models/cart-items';
 export class CartSummaryComponent implements OnInit {
 
   cartItems: IcartItem[];
+  totalPrice: number;
 
   constructor(private cartItemsService: CartItemsService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllCartItems();
+    this.totalPrice = 0;
   }
 
   getAllCartItems(): void {
     this.cartItemsService.getAllCartItems()
       .subscribe(cartItem => this.cartItems = cartItem);
+  }
+
+  // calculate the total price of the cart
+  sumUpTotalPrice() {
+    this.totalPrice = 0;
+    // console.log(this.cartItems);
+    for (let value of Object.values(this.cartItems)) {
+      this.totalPrice = this.totalPrice + (Number(value.price) * value.quantity);
+    }
+
+    return this.totalPrice
   }
 
   BackToCartButton() {

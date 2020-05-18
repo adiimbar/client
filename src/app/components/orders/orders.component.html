@@ -26,9 +26,10 @@
         <br>
         <mat-form-field class="example-full-width">
             <mat-label>Choose a date</mat-label>
-            <input matInput formControlName="shippingDate" [matDatepickerFilter]="myFilter" [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+            <!-- <input matInput formControlName="shippingDate" [matDatepickerFilter]="myFilter" [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker #picker></mat-datepicker> -->
+            <input matInput formControlName="shippingDate" type="date">
             <mat-error *ngIf="!orderForm.controls['shippingDate'].valid && orderForm.controls['shippingDate'].touched">
                 {{ requiredAlert }}
             </mat-error>

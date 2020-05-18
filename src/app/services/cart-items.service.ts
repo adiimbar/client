@@ -15,22 +15,20 @@ const httpOptions = {
 })
 export class CartItemsService {
   needToRefetchSubject = new Subject();
-  private cartItemsUrl: string = '/api/cartItems/allCartItems/';
-  private addCartItemsUrl: string = '/api/cartItems';
-  private deleteCartItemUrl: string = '/api/cartItems';
+  private cartItemsUrl: string = '/api/cartItems';
+  // private cartItemsUrl: string = '/api/cartItems/allCartItems';
+  // private addCartItemsUrl: string = '/api/cartItems';
+  // private deleteCartItemUrl: string = '/api/cartItems';
 
 
   constructor(private http: HttpClient) { }
 
   public getAllCartItems(): Observable<IcartItem[]> {
-    // console.log("start getallcartitemscall");
-    // console.log("service: cart-items, function: getAllCartItems, url: " + this.cartItemsUrl);
-    // console.log(this.http.get<IcartItem[]>(this.cartItemsUrl));
-    return this.http.get<IcartItem[]>(this.cartItemsUrl, httpOptions)
+    return this.http.get<IcartItem[]>(`${this.cartItemsUrl}/allCartItems`, httpOptions)
   }
 
   addCartItem (cartItem: IcartItem): Observable<IcartItem> {
-    return this.http.post<IcartItem>(this.addCartItemsUrl, cartItem, httpOptions)
+    return this.http.post<IcartItem>(this.cartItemsUrl, cartItem, httpOptions)
       .pipe(tap(() => {
         this.needToRefetchSubject.next(true);
       }));
@@ -40,7 +38,7 @@ export class CartItemsService {
   }
 
   deleteCartItem (productId: number): Observable<{}> {
-    const url = `${this.deleteCartItemUrl}/${productId}`;
+    const url = `${this.cartItemsUrl}/${productId}`;
     return this.http.delete(url, httpOptions)
       .pipe(tap(() => {
         this.needToRefetchSubject.next(true);
@@ -49,6 +47,19 @@ export class CartItemsService {
       //   catchError(this.handleError('deleteHero'))
       // );
   }
+
+  emptyCartItems (): Observable<{}> {
+    const url = `${this.cartItemsUrl}/emptyCartItems`;
+    return this.http.delete(url, httpOptions)
+      .pipe(tap(() => {
+        this.needToRefetchSubject.next(true);
+      }));
+      // .pipe(
+      //   catchError(this.handleError('deleteHero'))
+      // );
+  }
+
+
 }
 
 

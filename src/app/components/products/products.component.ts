@@ -18,6 +18,8 @@ export class ProductsComponent implements OnInit {
 
   products: Iproduct[];
   cartItem: IcartItem;
+  productsCompare = [];
+  public itemSearchValue: string = '';
   categoryOptions = [
     {name: 'All products', value: null},
     {name: 'Milk & Eggs', value: 5},
@@ -43,13 +45,13 @@ export class ProductsComponent implements OnInit {
     this.getAllProducts();
   }
 
-  async getAllProducts() {
+  getAllProducts() {
     this.productsService
       .getAllProducts()
       .subscribe(products => this.products = products);
   }
 
-  async getAllProductsByCategoryId(categoryId) {
+  getAllProductsByCategoryId(categoryId) {
     this.productsService
       .getAllProductsByCategoryId(categoryId)
       .subscribe(products => this.products = products);
@@ -81,7 +83,14 @@ export class ProductsComponent implements OnInit {
     else {
       this.getAllProductsByCategoryId(categoryId)
     }
+  }
 
+  searchItemButton() {
+    let productName = this.itemSearchValue;
+
+    this.productsService
+      .getProductByName(productName)
+      .subscribe(products => this.products = products);
   }
 
 }
@@ -144,10 +153,10 @@ export class ProductDialog {
       }
 
     // console.log(addCartItemRequestObj);
-    await this.cartItemsService
+    this.cartItemsService
       .addCartItem(addCartItemRequestObj)
       // // .addCartItem(newCartItem)
-      .subscribe(res => console.log(res));
+      .subscribe();
     // // need to pass the data to the cart table
 
     this.dialogRef.close();
