@@ -1,7 +1,4 @@
 
-<h3>shipping details</h3>
-
-
 
 <form [formGroup]="orderForm">
   
@@ -9,7 +6,7 @@
         <mat-form-field>
             <mat-label>City</mat-label>
             <mat-select formControlName="city">
-                <mat-option *ngFor="let city of cityOptions" value="city">{{city}}</mat-option>
+                <mat-option *ngFor="let city of cityOptions" value="{{city}}">{{city}}</mat-option>
             </mat-select>
             <mat-error *ngIf="!orderForm.controls['city'].valid && orderForm.controls['city'].touched">
                 {{ requiredAlert }}
@@ -51,14 +48,13 @@
             </mat-error>
         </mat-form-field>
         <br>
-        <h3>need to disable button after click</h3>
         <div class="example-button-row">
             <button mat-raised-button (click)="orderClick()" type="submit">Order</button>
         </div>
 
     </div>
 
-        {{orderForm.value | json}}
+        <!-- {{orderForm.value | json}} -->
 
   </form>
 

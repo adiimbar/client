@@ -1,17 +1,19 @@
-
 <form [formGroup]="registrationForm">
 
     <br>
     <div class="example-button-row">
-        <button mat-raised-button (click)="formSwitchButton()" type="button" *ngIf="formSwitchValue == 'addProduct'">Add product</button>
-        <button mat-raised-button (click)="formSwitchButton()" type="button" *ngIf="formSwitchValue == 'updateProduct'">Update product</button>
+        <button mat-raised-button (click)="formSwitchButton()" type="button" *ngIf="formSwitchValue == 'addProduct'">Add
+            product</button>
+        <button mat-raised-button (click)="formSwitchButton()" type="button"
+            *ngIf="formSwitchValue == 'updateProduct'">Update product</button>
     </div>
 
     <div>
         <mat-form-field>
             <mat-label>Product name</mat-label>
             <input matInput formControlName="productName" type="text">
-            <mat-error *ngIf="!registrationForm.controls['productName'].valid && registrationForm.controls['productName'].touched">
+            <mat-error
+                *ngIf="!registrationForm.controls['productName'].valid && registrationForm.controls['productName'].touched">
                 {{ requiredAlert }}
             </mat-error>
         </mat-form-field>
@@ -19,70 +21,59 @@
         <mat-form-field class="example-full-width">
             <mat-label>Product price</mat-label>
             <input matInput formControlName="productPrice" type="text">
-            <mat-error *ngIf="!registrationForm.controls['productPrice'].valid && registrationForm.controls['productPrice'].touched">
+            <mat-error
+                *ngIf="!registrationForm.controls['productPrice'].valid && registrationForm.controls['productPrice'].touched">
                 {{ requiredAlert }}
             </mat-error>
         </mat-form-field>
         <br>
 
-        <!-- <mat-form-field> -->
 
-
-        <!-- <div style="text-align:center; margin-top: 100px; "><mat-card style="margin-top:10px; width: 50%;">   -->
-            <div style="text-align:center;">
-                <mat-card style="margin-top:10px; width: 40%; margin-left:30%;">  
-                    <mat-card-content>  
-                <ul>  
-                    <li *ngFor="let file of files">  
-                      <span id="file-label">  
-                          {{file.name}}
-                    </span> 
-                        <mat-progress-bar [value]="file.progress"></mat-progress-bar>                
-                    </li>  
-                    <br>
-                </ul>  
-                <!-- need to remove this -->
-                we can do a dummy button that will be clickable after aploading a file
-            </mat-card-content>
-            <mat-card-actions>
-              <mat-icon>file_upload</mat-icon>
-                <button mat-button color="warn" (click)="onClick()">  
-                    Upload  
-                </button>  
-            </mat-card-actions>  
-          </mat-card>
-          <input type="file" #fileUpload id="fileUpload" name="fileUpload" accept="image/*" style="display:none;" />
-          <!-- <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*" style="display:none;" /> -->
+        <div style="text-align:center;">
+            <mat-card style="margin-top:10px; width: 40%; margin-left:30%;">
+                <mat-card-content>
+                    <ul>
+                        <li *ngFor="let file of files">
+                            <span id="file-label">
+                                {{file.name}}
+                            </span>
+                            <mat-progress-bar [value]="file.progress"></mat-progress-bar>
+                        </li>
+                        <br>
+                    </ul>
+                </mat-card-content>
+                <mat-card-actions>
+                    <mat-icon>file_upload</mat-icon>
+                    <button mat-button color="warn" (click)="onClick()">
+                        Upload
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+            <input type="file" #fileUpload id="fileUpload" name="fileUpload" accept="image/*" style="display:none;" />
         </div>
 
-        <!-- <mat-error *ngIf="!registrationForm.controls['productPrice'].valid && registrationForm.controls['productPrice'].touched">
-            {{ requiredAlert }}
-        </mat-error> -->
-    <!-- </mat-form-field> -->
 
 
         <br>
         <mat-form-field class="example-full-width">
             <mat-label>Category</mat-label>
             <mat-select formControlName="category">
-                <mat-option *ngFor="let category of categoryOptions" value="{{category.value}}">{{category.name}}</mat-option>
+                <mat-option *ngFor="let category of categoryOptions" value="{{category.value}}">{{category.name}}
+                </mat-option>
             </mat-select>
-            <mat-error *ngIf="!registrationForm.controls['category'].valid && registrationForm.controls['category'].touched">
+            <mat-error
+                *ngIf="!registrationForm.controls['category'].valid && registrationForm.controls['category'].touched">
                 {{ requiredAlert }}
             </mat-error>
         </mat-form-field>
         <br>
         <div class="example-button-row">
-            <button mat-raised-button (click)="saveproduct()" type="submit" *ngIf="formSwitchValue == 'addProduct'">Add</button>
-            <button mat-raised-button (click)="updateProduct()" type="submit" *ngIf="formSwitchValue == 'updateProduct'">Update</button>
+            <button mat-raised-button (click)="saveproduct()" type="submit"
+                *ngIf="formSwitchValue == 'addProduct'">Add</button>
+            <button mat-raised-button (click)="updateProduct()" type="submit"
+                *ngIf="formSwitchValue == 'updateProduct'">Update</button>
         </div>
 
     </div>
 
-        {{registrationForm.value | json}}
-        <p style="color: red;">need to set validations feedback</p>
-
-  </form>
-
-
-
+</form>

@@ -13,7 +13,8 @@ import { UploadService } from 'src/app/services/upload.service';
   styleUrls: ['./admin-products.component.css']
 })
 export class AdminProductsComponent implements OnInit {
-  products: Iproduct[];
+  products: Iproduct[] = [];
+  public itemSearchValue: string = '';
   // cartItem: IcartItem;
   categoryOptions = [
     {name: 'All products', value: null},
@@ -23,13 +24,14 @@ export class AdminProductsComponent implements OnInit {
     {name: "Wine & Drinks", value: 9}
   ];
 
-
   constructor(private productsService: ProductsService, private uploadService: UploadService, public dialog: MatDialog) { }
-
-
 
   ngOnInit() {
     this.getAllProducts();
+
+    this.productsService.needToRefetchSubject.subscribe((value) => {
+      if (value) this.getAllProducts();
+    })
   }
 
   async getAllProducts() {
@@ -57,7 +59,15 @@ export class AdminProductsComponent implements OnInit {
     else {
       this.getAllProductsByCategoryId(categoryId)
     }
+  }
 
+  
+  searchItemButton() {
+    let productName = this.itemSearchValue;
+
+    this.productsService
+      .getProductByName(productName)
+      .subscribe(products => this.products = products);
   }
 
 }

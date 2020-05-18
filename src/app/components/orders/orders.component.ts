@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 // import { UserDetails } from 'src/app/models/UserDetails';
 import { OrdersService } from 'src/app/services/orders.service';
 import { OrderDetails } from 'src/app/models/OrderDetails';
+import { CartItemsService } from 'src/app/services/cart-items.service';
+import { IcartItem } from 'src/app/models/cart-items';
+
 
 
 @Component({
@@ -14,6 +18,8 @@ import { OrderDetails } from 'src/app/models/OrderDetails';
 export class OrdersComponent implements OnInit {
 
   // userDetails: UserDetails[];
+
+  cartItems: IcartItem[];
 
   // need to make city option global
   cityOptions = ['Jerusalem', 'Tel Aviv', 'Haifa', 'Rishon LeZion', 'Petah Tikva', 'Ashdod', 'Netanya', "Be'er Sheva", 'Bnei Brak', 'Holon'];
@@ -36,7 +42,7 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  constructor(private fb: FormBuilder, private ordersService: OrdersService, private usersService: UserService) {
+  constructor(private fb: FormBuilder, private ordersService: OrdersService, private cartItemsService: CartItemsService, private router: Router) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 0, 0, 0);
     this.maxDate = new Date(currentYear + 1, 11, 31);
@@ -57,11 +63,19 @@ export class OrdersComponent implements OnInit {
   // }
 
 
-    // Prevent Saturday from being selected.  
-  myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    return day !== 6;
+  emptyCartItems() {
+    this.cartItemsService
+      .emptyCartItems()
+      .subscribe();
   }
+
+
+
+  //   // Prevent Saturday from being selected.  
+  // myFilter = (d: Date | null): boolean => {
+  //   const day = (d || new Date()).getDay();
+  //   return day !== 6;
+  // }
 
   orderClick() {
 
@@ -82,6 +96,14 @@ export class OrdersComponent implements OnInit {
       .addOrder(this.orderDetails)
       // // .addCartItem(newCartItem)
       .subscribe(res => console.log(res));
+
+
+      this.emptyCartItems();
+      this.router.navigate(["/store"]);
+
+
+      // need to remove this
+      alert('order submited successfully');
 
     }
     else {

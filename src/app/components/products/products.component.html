@@ -3,12 +3,10 @@
     <section>
         <div class="productsMenuDiv example-button-row">
           <button mat-button *ngFor="let category of categoryOptions" (click)="categoryButton(category.value)">{{category.name}}</button>
-          <!-- <form> -->
-            <span style="right: 10px;">
+          <span style="right: 10px;">
               <input [(ngModel)]="itemSearchValue" type="text" placeholder="Search a product">
               <button mat-button (click)="searchItemButton()">Search</button>
-            </span>
-          <!-- </form> -->
+          </span>
         </div>
     </section>
 

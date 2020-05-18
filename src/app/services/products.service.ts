@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Iproduct } from '../models/product';
 import { IaddProduct} from '../models/addProduct';
 
@@ -10,6 +11,7 @@ import { IaddProduct} from '../models/addProduct';
 })
 export class ProductsService {
 
+  needToRefetchSubject = new Subject();
   private productsUrl: string = "/api/products/";
   // private uploadProductUrl: string = "/api/products/";
 
@@ -31,13 +33,19 @@ export class ProductsService {
     return this.http.get<Iproduct[]>(url);
   }
 
-  public addProduct(product: Iproduct[]): Observable<Iproduct[]> {
+  addProduct(product: Iproduct[]): Observable<Iproduct[]> {
     // console.log(this.http.get<Iproduct[]>(this.productsUrl));
-    return this.http.post<Iproduct[]>(this.productsUrl, product);
+    return this.http.post<Iproduct[]>(this.productsUrl, product)
+      .pipe(tap(() => {
+        this.needToRefetchSubject.next(true);
+      }));
   }
 
   public updateProduct (product: Iproduct[]): Observable<Iproduct[]> {
     return this.http.put<Iproduct[]>(this.productsUrl, product)
+      .pipe(tap(() => {
+        this.needToRefetchSubject.next(true);
+      }));
       // .pipe(
       //   catchError(this.handleError('updateProduct', hero))
       // );

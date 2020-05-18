@@ -2,11 +2,7 @@
     <span style="float: left;">
         <h3>My cart</h3>
     </span>
-    <!-- <span style="right: 10px;"> -->
-        <button mat-raised-button (click)="emptyCartButton()">Empty cart</button>
-    <!-- </span> -->
 </div>
-<!-- <mat-divider></mat-divider> -->
 
 
 <div>
@@ -26,23 +22,21 @@
     
                     <img mat-card-image src="{{cartItem.image_path}}" alt="product Photo" class="productImageClass" > 
                 </td>
-                <td mat-footer-cell *matFooterCellDef></td>
+                <td mat-footer-cell *matFooterCellDef>
+                    <button mat-raised-button (click)="emptyCartButton()">Empty cart</button>
+                </td>
             </ng-container>
 
             <!-- Item name Column -->
             <ng-container matColumnDef="product_name">
                 <th mat-header-cell *matHeaderCellDef> Product name </th>
-                <!-- <td mat-cell *matCellDef="let IcartItems"> {{IcartItems.product_id}} </td> -->
                 <td mat-cell *matCellDef="let cartItem"  id="{{cartItem.product_id}}"> {{cartItem.product_name}}</td>
                 <td mat-footer-cell *matFooterCellDef></td>
-                <!-- <td mat-cell *matIdCellDef>id = 42</td> -->
             </ng-container>
 
             <!-- price Column -->
             <ng-container matColumnDef="price">
                 <th mat-header-cell *matHeaderCellDef> Unit price </th>
-                <!-- <td mat-cell *matCellDef="let IcartItems"> {{IcartItems.product_id}} </td> -->
-                <!-- <td mat-cell *matCellDef="let cartItem"> {{cartItem.price}}&#8362; </td> -->
                 <td mat-cell *matCellDef="let cartItem"> {{cartItem.price | currency:'ILS'}}</td>
                 <td mat-footer-cell *matFooterCellDef></td>
             </ng-container>
@@ -50,10 +44,8 @@
             <!-- quantity Column -->
             <ng-container matColumnDef="quantity">
                 <th mat-header-cell *matHeaderCellDef> Quantity </th>
-                <!-- <td mat-cell *matCellDef="let IcartItems"> {{IcartItems.product_id}} </td> -->
                 <td mat-cell *matCellDef="let cartItem"> {{cartItem.quantity}} </td>
                 <td mat-footer-cell *matFooterCellDef>
-                    <!-- <button mat-raised-button (click)="placeOrder(cartItems)" type="submit">Check out</button> -->
                     <button mat-raised-button (click)="placeOrder()" type="submit">Check out</button>
                 </td>
             </ng-container>
@@ -61,9 +53,6 @@
             <!-- sum Column -->
             <ng-container matColumnDef="sum">
                 <th mat-header-cell *matHeaderCellDef> Sum </th>
-                <!-- <td mat-cell *matCellDef="let IcartItems"> {{IcartItems.products_price | currency}} </td> -->
-                <!-- <td mat-cell *matCellDef="let cartItem"> {{cartItem.products_price | currency}} </td> -->
-                <!-- <td mat-cell *matCellDef="let cartItem"> {{cartItem.sum}}&#8362; </td> -->
                 <td mat-cell *matCellDef="let cartItem"> {{cartItem.sum | currency:'ILS'}} </td>
                 <td mat-footer-cell *matFooterCellDef> Total {{getTotalCostOfItemsInCart() | currency:'ILS'}} </td>
             </ng-container>
@@ -72,14 +61,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
         </table>
-    </div>
-    <div>
-        <section>
-            <!-- <div class="example-label">Basic</div> -->
-            <!-- <div class="example-button-row">
-              <button mat-raised-button>order</button>
-            </div> -->
-          </section>
     </div>
 
 </div>
