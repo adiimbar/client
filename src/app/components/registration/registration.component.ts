@@ -1,19 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { PasswordCrossFieldValidator } from 'src/app/validators/password-cross-field.validator';
 import { checkPassword } from 'src/app/validators/check-password.validator';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { UserRegistrationDetails } from 'src/app/models/UserRegistrationDetails';
 import { UserService } from 'src/app/services/user.service';
 
-
-/** Error when invalid control is dirty, touched, or submitted. */
-// export class MyErrorStateMatcher implements ErrorStateMatcher {
-//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-//     const isSubmitted = form && form.submitted;
-//     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-//   }
-// }
 
 class CrossFieldErrorMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -30,10 +23,13 @@ class CrossFieldErrorMatcher implements ErrorStateMatcher {
 export class RegistrationComponent implements OnInit {
 
   registrationForm: FormGroup;
+  
   userRegistrationDetails: UserRegistrationDetails[];
   errorMatcher = new CrossFieldErrorMatcher();
   hide = true;
   requiredAlert: string = 'field is required';
+  // formFirstStep: string = 'block';
+  // formSecondStep: string = 'none';
 
 
   createForm() {
@@ -51,11 +47,11 @@ export class RegistrationComponent implements OnInit {
       street: ['', [Validators.required]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]]
-    // });
-  }, {validator: PasswordCrossFieldValidator});
-}
+      // });
+    }, { validator: PasswordCrossFieldValidator });
+  }
 
-  constructor(private fb: FormBuilder, private usersService: UserService) { }
+  constructor(private fb: FormBuilder, private usersService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.createForm();
@@ -70,7 +66,7 @@ export class RegistrationComponent implements OnInit {
   getErrorEmail() {
     return this.registrationForm.get('email').hasError('required') ? 'Field is required' :
       this.registrationForm.get('email').hasError('pattern') ? 'Not a valid email address' : '';
-        // this.registrationForm.get('email').hasError('alreadyInUse') ? 'This email address is already in use' : '';
+    // this.registrationForm.get('email').hasError('alreadyInUse') ? 'This email address is already in use' : '';
   }
 
   getErrorPassword() {
@@ -78,31 +74,42 @@ export class RegistrationComponent implements OnInit {
       this.registrationForm.get('password').hasError('requirements') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
   }
 
-
-
-
   // matcher = new MyErrorStateMatcher();
 
   // need to make city option global
-  cityOptions = ['Tel Aviv', 'Jerusalem', "Be'er Sheva"];
+  cityOptions = ['Jerusalem', 'Tel Aviv', 'Haifa', 'Rishon LeZion', 'Petah Tikva', 'Ashdod', 'Netanya', "Be'er Sheva", 'Bnei Brak', 'Holon'];
 
-  next() {}
+  next() { }
 
   submitSignUp() {
 
-    let user: UserRegistrationDetails = this.registrationForm.value;
+    if(this.registrationForm.valid) {
 
+      let user: UserRegistrationDetails = this.registrationForm.value;
 
-    this.usersService
-    .addUser(user)
-    .subscribe();
-    // .subscribe(user => this.userRegistrationDetails.push(user));
-
+      this.usersService
+        .addUser(user)
+        .subscribe();
+  
+      this.router.navigate(["/home"]);
+      alert('User added successfully');
+  
+    }
 
   }
 
-  // onSubmit() {
-  //   // console.log(this.userModel);
+  back() {
+    this.router.navigate(["/home"]);
+  }
+
+  // formNextButton() {
+  //   this.formFirstStep = 'none';
+  //   this.formSecondStep = 'block';
+  // }
+
+  // formPreviousButton() {
+  //   this.formFirstStep = 'block';
+  //   this.formSecondStep = 'none';
   // }
 
 

@@ -1,21 +1,5 @@
-/* section {
-    min-height: 100%;
-    border: 2px solid black;
+section {
+    height: 100%;
     background-color: deepskyblue;
-    text-align: center;
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-}
+   }
 
-section > * {
-    border: 2px solid black;
-}
-
-.signinContainer {
-    grid-column: span 12;
-}
-
-.signInPanel-1 {
-    float: left;
-} */
