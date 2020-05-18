@@ -62,13 +62,7 @@ export class LoginComponent implements OnInit {
   public userLoginDetails: UserLoginDetails;
   private usersService: UserService;
 
-  // The router parameter is an example to a short writing of a member + it's assignment
-  // private router: Router EQUIVALENT TO the following 3: 
-  // 1. Member definition
-  // 2. Parameter definition
-  // 3. this.router = router
   constructor(usersService: UserService, private router: Router, private fb: FormBuilder) {
-//        this.userLoginDetails = new UserLoginDetails('', '');
       this.userLoginDetails = new UserLoginDetails();
       this.usersService = usersService;
   }
@@ -114,24 +108,7 @@ export class LoginComponent implements OnInit {
       // this.getErrorEmail()
     }
 
-     
-
   }
-
-  // public signUp() {
-    
-  // }
-
-
-  // email = new FormControl('', [Validators.required, Validators.email]);
-
-  // getErrorMessage() {
-  //   if (this.email.hasError('required')) {
-  //     return 'You must enter a value';
-  //   }
-
-  //   return this.email.hasError('email') ? 'Not a valid email' : '';
-  // }
 
 
 }
