@@ -1,34 +1,19 @@
 section {
     min-height: 100%;
-    border: 2px solid black;
-    background-color: deepskyblue;
+    /* border: 2px solid black;
+    background-color: deepskyblue; */
     text-align: center;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(12, 1fr); /* 12 columns */
 }
 
-section > * {
+/* section > * {
     border: 2px solid black;
-}
+} */
 
 .loginStyle, .aboutStyle , .storeInfoStyle {
     grid-column: span 4;
 
 }
-
-
-/* .app-login {
-    grid-column: span 4;
-}
-
-.app-about {
-    grid-column: span 4;   
-}
-
-.app-store-info {
-    grid-column: span 4;   
-} */
-
-
 

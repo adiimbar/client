@@ -10,7 +10,7 @@ import { UploadService } from 'src/app/services/upload.service';
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
-  styleUrls: ['./admin-products.component.css']
+  styleUrls: ['./admin-products.component.css', '../../styles/productsStyle.css']
 })
 export class AdminProductsComponent implements OnInit {
   products: Iproduct[] = [];
@@ -34,13 +34,13 @@ export class AdminProductsComponent implements OnInit {
     })
   }
 
-  async getAllProducts() {
+  getAllProducts() {
     this.productsService
       .getAllProducts()
       .subscribe(products => this.products = products);
   }
 
-  async getAllProductsByCategoryId(categoryId) {
+  getAllProductsByCategoryId(categoryId) {
     this.productsService
       .getAllProductsByCategoryId(categoryId)
       .subscribe(products => this.products = products);

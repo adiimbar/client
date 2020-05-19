@@ -20,7 +20,9 @@ main {
     grid-column: span 8;   
 } */
 
-
+/* aside {
+  background-color: #f0f3f9;
+} */
 
 .example-container {
     position: absolute;

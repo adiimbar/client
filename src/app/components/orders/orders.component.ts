@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-// import { UserDetails } from 'src/app/models/UserDetails';
+import { UserDetails } from 'src/app/models/UserDetails';
 import { OrdersService } from 'src/app/services/orders.service';
 import { OrderDetails } from 'src/app/models/OrderDetails';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import { IcartItem } from 'src/app/models/cart-items';
-
 
 
 @Component({
@@ -17,7 +16,10 @@ import { IcartItem } from 'src/app/models/cart-items';
 })
 export class OrdersComponent implements OnInit {
 
-  // userDetails: UserDetails[];
+  userDetails: UserDetails[];
+
+  userModel;
+
 
   cartItems: IcartItem[];
 
@@ -42,7 +44,13 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  constructor(private fb: FormBuilder, private ordersService: OrdersService, private cartItemsService: CartItemsService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private ordersService: OrdersService,
+    private cartItemsService: CartItemsService,
+    private router: Router,
+    private userService: UserService) {
+    
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 0, 0, 0);
     this.maxDate = new Date(currentYear + 1, 11, 31);
@@ -51,16 +59,16 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit() {
     // need to fetch userData from cache and fill the fileds
-    // this.getUser();
+    this.getUser();
     // this.createForm(useDetails);
     this.createForm();
   }
 
-  // getUser(): void {
-  //   this.usersService
-  //     .getUser()
-  //     .subscribe(user => this.userDetails = user);
-  // }
+  getUser(){
+    this.userService
+      .getUser()
+      .subscribe(user => this.userModel = user);
+  }
 
 
   emptyCartItems() {
@@ -112,5 +120,6 @@ export class OrdersComponent implements OnInit {
 
     // console.log(this.userDetails.firstName);
   }
+
 
 }

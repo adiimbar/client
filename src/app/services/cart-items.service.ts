@@ -16,9 +16,6 @@ const httpOptions = {
 export class CartItemsService {
   needToRefetchSubject = new Subject();
   private cartItemsUrl: string = '/api/cartItems';
-  // private cartItemsUrl: string = '/api/cartItems/allCartItems';
-  // private addCartItemsUrl: string = '/api/cartItems';
-  // private deleteCartItemUrl: string = '/api/cartItems';
 
 
   constructor(private http: HttpClient) { }

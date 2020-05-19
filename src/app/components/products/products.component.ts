@@ -12,7 +12,7 @@ import { UploadService } from 'src/app/services/upload.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css', '../../styles/productsStyle.css']
 })
 export class ProductsComponent implements OnInit {
 
@@ -108,7 +108,7 @@ export interface DialogData {
 @Component({
   selector: 'product-dialog',
   templateUrl: 'product-dialog.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css', '../../styles/productsStyle.css']
 })
 export class ProductDialog {
   constructor(public dialogRef: MatDialogRef<ProductDialog>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private cartItemsService: CartItemsService) {}
@@ -145,7 +145,7 @@ export class ProductDialog {
     }
   };
 
-  async addToCart(addedProductData) {
+  addToCart(addedProductData) {
 
     const addCartItemRequestObj = {
       product_id: addedProductData.product_id,

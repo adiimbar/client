@@ -20,24 +20,24 @@ export class UserService {
 
     public userType: string;
 
-    private getUserUrl: string = '/api/users/me';
+    private userUrl: string = '/api/users';
 
     constructor(private http: HttpClient) {
     }
  
     public login(userLoginDetails: UserLoginDetails): Observable<SuccessfulLoginServerResponse> {
-
-        //  The http request will be sent after the subscribe() method will be called
-        return this.http.post<SuccessfulLoginServerResponse>("http://localhost:3000/users/login", userLoginDetails);
+      const url = `${this.userUrl}/login`;
+      return this.http.post<SuccessfulLoginServerResponse>(url, userLoginDetails);
     }
 
     public addUser(userRegistrationDetails: UserRegistrationDetails): Observable<void> {
-        
-        return this.http.post<void>("http://localhost:3000/users", userRegistrationDetails);
+      const url = `${this.userUrl}`;
+      return this.http.post<void>(url, userRegistrationDetails);
     }
 
     public getUser(): Observable<UserDetails[]> {
-        return this.http.get<UserDetails[]>(this.getUserUrl, httpOptions);
-      }
+      const url = `${this.userUrl}/me`;
+      return this.http.get<UserDetails[]>(url, httpOptions);
+    }
 
 }
