@@ -5,7 +5,7 @@
     <div>
         <mat-form-field class="field-style">
             <mat-label>City</mat-label>
-            <mat-select formControlName="city" [ngModel]="userModel.city">
+            <mat-select formControlName="city" [(ngModel)]="userModel.city">
                 <mat-option *ngFor="let city of cityOptions" value="{{city}}">{{city}}</mat-option>
             </mat-select>
             <mat-error *ngIf="!orderForm.controls['city'].valid && orderForm.controls['city'].touched">
@@ -15,7 +15,7 @@
         <br>
         <mat-form-field class="field-style">
             <mat-label>Street</mat-label>
-            <input matInput formControlName="street" type="text" [ngModel]="userModel.street">
+            <input matInput formControlName="street" type="text" [(ngModel)]="userModel.street">
             <mat-error *ngIf="!orderForm.controls['street'].valid && orderForm.controls['street'].touched">
                 {{ requiredAlert }}
             </mat-error>
@@ -26,7 +26,7 @@
             <!-- <input matInput formControlName="shippingDate" [matDatepickerFilter]="myFilter" [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker> -->
-            <input matInput formControlName="shippingDate" type="date">
+            <input matInput formControlName="shippingDate" type="date" min="{{minDate}}">
             <mat-error *ngIf="!orderForm.controls['shippingDate'].valid && orderForm.controls['shippingDate'].touched">
                 {{ requiredAlert }}
             </mat-error>
@@ -54,7 +54,7 @@
 
     </div>
 
-        <!-- {{orderForm.value | json}} -->
+        {{orderForm.value | json}}
 
   </form>
 </div>

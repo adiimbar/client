@@ -38,6 +38,7 @@ import { OrdersPanelComponent } from './components/orders-panel/orders-panel.com
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
 
 
 
@@ -71,8 +72,11 @@ import { AdminProductsComponent } from './components/admin-products/admin-produc
 
     AdminProductsComponent,
 
+    OrderDialogComponent,
+
 
   ],
+  entryComponents: [OrderDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

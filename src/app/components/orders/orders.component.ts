@@ -7,6 +7,9 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { OrderDetails } from 'src/app/models/OrderDetails';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import { IcartItem } from 'src/app/models/cart-items';
+import * as moment from 'moment';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { OrderDialogComponent } from 'src/app/components/order-dialog/order-dialog.component';
 
 import jsPDF from 'jspdf';
 import autoTable, { autoTable as autoTableType} from 'jspdf-autotable';
@@ -20,7 +23,7 @@ import autoTable, { autoTable as autoTableType} from 'jspdf-autotable';
 export class OrdersComponent implements OnInit {
 
   userDetails: UserDetails[];
-  userModel;
+  userModel: any;
   cartItems: IcartItem[];
   totalPrice: number;
 
@@ -33,8 +36,9 @@ export class OrdersComponent implements OnInit {
 
   orderForm: FormGroup;
   requiredAlert: string = 'field is required';
-  minDate: Date;
-  maxDate: Date;  
+  minDate: any;
+  // minDate: Date;
+  // maxDate: Date;  
 
   public orderDetails: OrderDetails
 
@@ -49,17 +53,19 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  constructor(
-    private fb: FormBuilder,
-    private ordersService: OrdersService,
-    private cartItemsService: CartItemsService,
-    private router: Router,
-    private userService: UserService) {
-    
-    const currentYear = new Date().getFullYear();
-    this.minDate = new Date();
-    this.maxDate = new Date(currentYear + 1, 11, 31);
-    this.orderDetails = new OrderDetails();
+  constructor(private fb: FormBuilder,
+              private ordersService: OrdersService,
+              private cartItemsService: CartItemsService,
+              private router: Router,
+              private userService: UserService,
+              public dialog: MatDialog) {
+
+    this.minDate = moment().format('YYYY-MM-DD');
+
+    // const currentYear = new Date().getFullYear();
+    // this.minDate = new Date();
+    // this.maxDate = new Date(currentYear + 1, 11, 31);
+    // this.orderDetails = new OrderDetails();
   }
 
   ngOnInit() {
@@ -96,37 +102,22 @@ export class OrdersComponent implements OnInit {
   orderClick() {
 
     if (this.orderForm.valid) {
-      console.log(this.orderForm.valid);
-
-      this.orderDetails.city = this.orderForm.value.city;
-      this.orderDetails.street = this.orderForm.value.street;
-      this.orderDetails.shippingDate = this.orderForm.value.shippingDate;
-      this.orderDetails.creditCard = this.orderForm.value.creditCard;
-
-      console.log(this.orderDetails)
-
-
       // // need to move the call
       // //first need to make sure the user want to order
       this.ordersService
-      .addOrder(this.orderDetails)
-      // // .addCartItem(newCartItem)
+      .addOrder(this.orderForm.value)
       .subscribe(res => console.log(res));
 
-
+      this.openDialog();
       this.emptyCartItems();
+
       this.router.navigate(["/store"]);
-
-
-      // need to remove this
-      alert('order submited successfully');
 
     }
     else {
       console.log('form not valid');
     }
 
-    // console.log(this.userDetails.firstName);
   }
 
   createPdf() {
@@ -161,9 +152,22 @@ export class OrdersComponent implements OnInit {
     return this.totalPrice
   }
 
+  
+  openDialog() {
+    let dialogRef = this.dialog.open(OrderDialogComponent, {data: {name: this.userModel.firstName}});
+
+    dialogRef.afterClosed().subscribe( downloadReceipt => {
+      console.log(typeof(downloadReceipt));
+      if(downloadReceipt === 'true') {
+        this.createPdf();
+      }
+
+      console.log(`dialog downloadReceipt value: ${downloadReceipt}`)
+    })
+  }
+
   newDate() {
-    let x = new Date;
-    console.log(x);
+    this.dialog.open(OrderDialogComponent);
   }
 
 }
