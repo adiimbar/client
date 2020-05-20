@@ -22,6 +22,8 @@ export class OrdersComponent implements OnInit {
   userDetails: UserDetails[];
   userModel;
   cartItems: IcartItem[];
+  totalPrice: number;
+
 
   docHead = [['Product name', 'Quantity', 'Price']];
   docData = [];
@@ -55,7 +57,7 @@ export class OrdersComponent implements OnInit {
     private userService: UserService) {
     
     const currentYear = new Date().getFullYear();
-    this.minDate = new Date(currentYear - 0, 0, 0);
+    this.minDate = new Date();
     this.maxDate = new Date(currentYear + 1, 11, 31);
     this.orderDetails = new OrderDetails();
   }
@@ -76,8 +78,6 @@ export class OrdersComponent implements OnInit {
     this.cartItemsService.getAllCartItems()
       .subscribe(cartItem => this.cartItems = cartItem);
   }
-
-
 
   emptyCartItems() {
     this.cartItemsService
@@ -132,6 +132,8 @@ export class OrdersComponent implements OnInit {
   createPdf() {
     const doc = new jsPDF()
       this.insertCartItemsToTableBody();
+      let totalPrice = this.sumUpTotalPrice();
+      this.docData.push(['', '', 'Total price: ' + totalPrice])
       autoTable(doc, {
       head: this.docHead,
       body: this.docData,
@@ -147,5 +149,21 @@ export class OrdersComponent implements OnInit {
     });
   }
 
+  sumUpTotalPrice() {
+    this.totalPrice = 0;
+    // console.log(this.cartItems);
+    for (let value of Object.values(this.cartItems)) {
+      this.totalPrice = this.totalPrice + (Number(value.price) * value.quantity);
+    }
+
+    this.totalPrice = Number(this.totalPrice.toFixed(2))
+
+    return this.totalPrice
+  }
+
+  newDate() {
+    let x = new Date;
+    console.log(x);
+  }
 
 }
