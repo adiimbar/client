@@ -6,6 +6,8 @@ import { Iproduct } from 'src/app/models/product';
 import { MatDialog } from '@angular/material/dialog';
 // import { Mock } from 'protractor/built/driverProviders';
 import { UploadService } from 'src/app/services/upload.service';
+import { UpdateProductsService } from 'src/app/services/update-products.service';
+
 
 @Component({
   selector: 'app-admin-products',
@@ -24,7 +26,7 @@ export class AdminProductsComponent implements OnInit {
     {name: "Wine & Drinks", value: 9}
   ];
 
-  constructor(private productsService: ProductsService, private uploadService: UploadService, public dialog: MatDialog) { }
+  constructor(private productsService: ProductsService, private uploadService: UploadService, public dialog: MatDialog, private _updateProductsService: UpdateProductsService) { }
 
   ngOnInit() {
     this.getAllProducts();
@@ -47,7 +49,8 @@ export class AdminProductsComponent implements OnInit {
   }
 
   updateCartButton(product) {
-    console.log(product);
+    // console.log(product);
+    this._updateProductsService.pushItemDetails(product);
   }
 
 

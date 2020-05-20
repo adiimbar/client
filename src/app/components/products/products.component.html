@@ -16,8 +16,7 @@
   <h1>We didn't find matching products</h1>
 </div>
 
-<mat-card class="card-div" *ngFor="let product of products" >
-    <a role="button" (click)="productDialog(this.product)">
+<mat-card class="card-div" *ngFor="let product of products" (click)="productDialog(this.product)">
       <mat-card-header>
       </mat-card-header>
       <img mat-card-image src="{{product.image_path}}" alt="product Photo" class="productImageClass">
@@ -28,6 +27,5 @@
           {{product.price | currency:'ILS'}}
         </p>
       </mat-card-content>
-      </a>
   </mat-card>
 

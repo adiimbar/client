@@ -44,7 +44,17 @@
             <!-- quantity Column -->
             <ng-container matColumnDef="quantity">
                 <th mat-header-cell *matHeaderCellDef> Quantity </th>
-                <td mat-cell *matCellDef="let cartItem"> {{cartItem.quantity}} </td>
+
+                <td mat-cell *matCellDef="let cartItem">
+                    <button (click)="decreament(cartItem)" type="button" class="cartQuantityButton">-</button>
+                    <input readonly=""  value="{{cartItem.quantity}}" type="text" class="cartQuantityInput">
+                    <button (click)="increament(cartItem)" type="button" class="cartQuantityButton">+</button>
+                    <!-- <button (click)="cartItem.quantity = cartItem.quantity + 1" type="button" class="cartQuantityButton">+</button> -->
+                </td>
+
+                <!-- <td mat-cell *matCellDef="let cartItem"> {{cartItem.quantity}} </td> -->
+                
+                
                 <td mat-footer-cell *matFooterCellDef>
                     <button mat-raised-button (click)="placeOrder()" type="submit">Check out</button>
                 </td>

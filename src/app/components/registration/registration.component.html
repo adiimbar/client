@@ -6,7 +6,7 @@
     <span>
         <mat-form-field class="example-full-width">
             <mat-label>ID Number</mat-label>
-            <input matInput formControlName="identificationNumber">
+            <input #idRef matInput formControlName="identificationNumber">
             <mat-error *ngIf="!registrationForm.controls['identificationNumber'].valid && registrationForm.controls['identificationNumber'].touched">
                 {{ requiredAlert }}
             </mat-error>

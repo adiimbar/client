@@ -21,8 +21,8 @@
   <h1>No item matching that name was found</h1>
 </div>
 
-<mat-card class="card-div" *ngFor="let product of products" >
-    <a role="button" (click)="updateCartButton(this.product)">
+<mat-card class="card-div" *ngFor="let product of products" (click)="updateCartButton(this.product)">
+    <!-- <a role="button" > -->
       <mat-card-header>
       </mat-card-header>
       <img mat-card-image src="{{product.image_path}}" alt="product Photo" class="productImageClass">
@@ -33,5 +33,5 @@
           {{product.price | currency:'ILS'}}
         </p>
       </mat-card-content>
-      </a>
+      <!-- </a> -->
   </mat-card>

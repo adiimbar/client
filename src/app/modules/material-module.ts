@@ -15,6 +15,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import {MatListModule} from '@angular/material/list';
     MatStepperModule,
     MatProgressBarModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatTabsModule
   ]
 })
 export class MaterialModule {}

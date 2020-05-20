@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { PasswordCrossFieldValidator } from 'src/app/validators/password-cross-field.validator';
@@ -20,7 +20,7 @@ class CrossFieldErrorMatcher implements ErrorStateMatcher {
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, AfterViewInit {
 
   registrationForm: FormGroup;
   
@@ -30,6 +30,7 @@ export class RegistrationComponent implements OnInit {
   requiredAlert: string = 'field is required';
   // formFirstStep: string = 'block';
   // formSecondStep: string = 'none';
+  @ViewChild('idRef') idElementRef: ElementRef;
 
 
   createForm() {
@@ -55,6 +56,10 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+  }
+
+  ngAfterViewInit() {
+    this.idElementRef.nativeElement.focus();
   }
 
   // checkPassword(control) {

@@ -8,6 +8,9 @@ import { OrderDetails } from 'src/app/models/OrderDetails';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import { IcartItem } from 'src/app/models/cart-items';
 
+import jsPDF from 'jspdf';
+import autoTable, { autoTable as autoTableType} from 'jspdf-autotable';
+
 
 @Component({
   selector: 'app-orders',
@@ -17,11 +20,11 @@ import { IcartItem } from 'src/app/models/cart-items';
 export class OrdersComponent implements OnInit {
 
   userDetails: UserDetails[];
-
   userModel;
-
-
   cartItems: IcartItem[];
+
+  docHead = [['Product name', 'Quantity', 'Price']];
+  docData = [];
 
   // need to make city option global
   cityOptions = ['Jerusalem', 'Tel Aviv', 'Haifa', 'Rishon LeZion', 'Petah Tikva', 'Ashdod', 'Netanya', "Be'er Sheva", 'Bnei Brak', 'Holon'];
@@ -58,9 +61,8 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
-    // need to fetch userData from cache and fill the fileds
     this.getUser();
-    // this.createForm(useDetails);
+    this.getAllCartItems();
     this.createForm();
   }
 
@@ -69,6 +71,12 @@ export class OrdersComponent implements OnInit {
       .getUser()
       .subscribe(user => this.userModel = user);
   }
+
+  getAllCartItems(): void {
+    this.cartItemsService.getAllCartItems()
+      .subscribe(cartItem => this.cartItems = cartItem);
+  }
+
 
 
   emptyCartItems() {
@@ -119,6 +127,24 @@ export class OrdersComponent implements OnInit {
     }
 
     // console.log(this.userDetails.firstName);
+  }
+
+  createPdf() {
+    const doc = new jsPDF()
+      this.insertCartItemsToTableBody();
+      autoTable(doc, {
+      head: this.docHead,
+      body: this.docData,
+    })
+
+    doc.save('receipt.pdf');
+  }
+
+  insertCartItemsToTableBody() {
+    this.docData = [];
+    this.cartItems.map(item => {
+      this.docData.push([item.product_name, item.quantity, item.price])
+    });
   }
 
 

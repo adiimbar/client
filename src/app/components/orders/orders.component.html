@@ -1,9 +1,9 @@
 
-
-<form [formGroup]="orderForm">
+<div class="form-div">
+<form [formGroup]="orderForm" class="form-class">
   
     <div>
-        <mat-form-field>
+        <mat-form-field class="field-style">
             <mat-label>City</mat-label>
             <mat-select formControlName="city" [ngModel]="userModel.city">
                 <mat-option *ngFor="let city of cityOptions" value="{{city}}">{{city}}</mat-option>
@@ -13,7 +13,7 @@
             </mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="field-style">
             <mat-label>Street</mat-label>
             <input matInput formControlName="street" type="text" [ngModel]="userModel.street">
             <mat-error *ngIf="!orderForm.controls['street'].valid && orderForm.controls['street'].touched">
@@ -21,7 +21,7 @@
             </mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="field-style">
             <mat-label>Choose a date</mat-label>
             <!-- <input matInput formControlName="shippingDate" [matDatepickerFilter]="myFilter" [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -32,7 +32,7 @@
             </mat-error>
         </mat-form-field>
 
-        <!-- <mat-form-field class="example-full-width">
+        <!-- <mat-form-field class="field-style">
             <mat-label>ShippingDate</mat-label>
             <input matInput formControlName="shippingDate" type="date">
             <mat-error *ngIf="!orderForm.controls['shippingDate'].valid && orderForm.controls['shippingDate'].touched">
@@ -40,7 +40,7 @@
             </mat-error>
         </mat-form-field> -->
         <br>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="field-style">
             <mat-label>Credit card</mat-label>
             <input matInput formControlName="creditCard" type="text">
             <mat-error *ngIf="!orderForm.controls['creditCard'].valid && orderForm.controls['creditCard'].touched">
@@ -57,3 +57,6 @@
         <!-- {{orderForm.value | json}} -->
 
   </form>
+</div>
+
+<button (click)="createPdf()">asdf</button>

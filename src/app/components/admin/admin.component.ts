@@ -6,6 +6,10 @@ import { catchError, map } from 'rxjs/operators';
 import { UploadService } from 'src/app/services/upload.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { Iproduct } from 'src/app/models/product';
+import { UpdateProductsService } from 'src/app/services/update-products.service';
+import { UpdateProductDetails } from 'src/app/models/UpdateProductDetails';
+
+
 
 
 @Component({
@@ -32,22 +36,49 @@ export class AdminComponent implements OnInit {
    public files = [];
    public uploadedImageName;
    public formSwitchValue = "addProduct";
+   public productToUpdate = new UpdateProductDetails();
+
+   selected = '9';
+
+  //  holds values for form data binding
+   public ordersFormValuesDummy = {
+    productName: '',
+    productId: 0,
+    productPrice: '',
+    productImage: '',
+    category: ''  
+   }
  
 
   createForm() {
     this.registrationForm = this.fb.group({
       productName: ['', [Validators.required]],
-      // productId: ['', [Validators.required]],
-      productPrice: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.min(0)]],
+      productId: ['', []],
+      // productPrice: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.min(0)]],
+      productPrice: ['', [Validators.required, Validators.min(0)]],
       productImage: [this.uploadedImageName, [Validators.required]],
       category: ['', [Validators.required]]
     });
 }
 
-  constructor(private fb: FormBuilder, private uploadService: UploadService, private productsService: ProductsService) { }
+  constructor(
+    private fb: FormBuilder,
+    private uploadService: UploadService,
+    private productsService: ProductsService,
+    private _updateProductsService: UpdateProductsService) { }
+
 
   ngOnInit() {
     this.createForm();
+
+    this._updateProductsService.itemToUpdate$
+    .subscribe(
+      item => {
+        // this.createForm();
+        this.productToUpdate = item;
+        this.setProductValuesToform(item);
+      }
+    )
   }
 
   saveproduct() {
@@ -66,6 +97,26 @@ export class AdminComponent implements OnInit {
 
   updateProduct() {
     console.log('update product was clicked');
+    // console.log(this.productToUpdate);
+    console.log(this.registrationForm.value);
+
+  }
+
+
+  setProductValuesToform(product) {
+    this.registrationForm.value.productName = product.product_name;
+    this.registrationForm.value.productId = product.product_id;
+    this.registrationForm.value.productPrice = product.price;
+    this.registrationForm.value.productImage = product.image_path;
+    this.registrationForm.value.category = product.category_id;
+    
+
+    // this.createForm();
+
+
+    // this.ordersFormValuesDummy = product;
+    // this.ordersFormValuesDummy.productName = product.product_name;
+
   }
 
   formSwitchButton() {

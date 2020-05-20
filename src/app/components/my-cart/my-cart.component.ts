@@ -6,10 +6,6 @@ import { IcartItem } from 'src/app/models/cart-items';
 // import { Icart } from 'src/app/models/cart';
 
 
-
-// need to make sure the table will update automaticaly
-
-
 @Component({
   selector: 'app-my-cart',
   templateUrl: './my-cart.component.html',
@@ -19,15 +15,11 @@ export class MyCartComponent implements OnInit {
 
   cartItems: IcartItem[];
 
-  // currency: string = '&#8362;';
-
   displayedColumns = ['image_path', 'product_name', 'price', 'quantity', 'sum'];
-  // transactions: Transaction[]
 
   constructor(private cartItemsService: CartItemsService, private router: Router) { }
 
   ngOnInit() {
-  // ngOnInit(): void {
 
     this.getAllCartItems();
 
@@ -39,6 +31,11 @@ export class MyCartComponent implements OnInit {
   getAllCartItems(): void {
     this.cartItemsService.getAllCartItems()
       .subscribe(cartItem => this.cartItems = cartItem);
+  }
+
+  updateCartItem(cartItem) {
+    this.cartItemsService.updateCartItem(cartItem)
+      .subscribe()
   }
 
   getTotalCostOfItemsInCart() {
@@ -65,5 +62,35 @@ export class MyCartComponent implements OnInit {
       .deleteCartItem(productId)
       .subscribe();
   }
+
+  increament(item) {
+    if(item.quantity < 50) {
+
+      item.quantity = item.quantity + 1;
+
+      let cartItem = {
+        product_id: item.product_id,
+        quantity: item.quantity
+      }
+  
+      this.updateCartItem(cartItem);  
+    }
+  }
+  
+  decreament(item) {
+    if(item.quantity > 1) {
+      
+      item.quantity = item.quantity - 1;
+
+      let cartItem = {
+        product_id: item.product_id,
+        quantity: item.quantity
+      }
+  
+      this.updateCartItem(cartItem);  
+    }
+  }
+
+
 
 }

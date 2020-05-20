@@ -11,7 +11,8 @@
     <div>
         <mat-form-field>
             <mat-label>Product name</mat-label>
-            <input matInput formControlName="productName" type="text">
+            <input matInput formControlName="productName" type="text" [ngModel]="productToUpdate.product_name">
+            <!-- <input matInput formControlName="productName" type="text"> -->
             <mat-error
                 *ngIf="!registrationForm.controls['productName'].valid && registrationForm.controls['productName'].touched">
                 {{ requiredAlert }}
@@ -20,7 +21,8 @@
         <br>
         <mat-form-field class="example-full-width">
             <mat-label>Product price</mat-label>
-            <input matInput formControlName="productPrice" type="text">
+            <input matInput formControlName="productPrice" type="text" [ngModel]="productToUpdate.price">
+            <!-- <input matInput formControlName="productPrice" type="text"> -->
             <mat-error
                 *ngIf="!registrationForm.controls['productPrice'].valid && registrationForm.controls['productPrice'].touched">
                 {{ requiredAlert }}
@@ -57,8 +59,9 @@
         <br>
         <mat-form-field class="example-full-width">
             <mat-label>Category</mat-label>
-            <mat-select formControlName="category">
-                <mat-option *ngFor="let category of categoryOptions" value="{{category.value}}">{{category.name}}
+            <!-- <mat-select formControlName="category" [(ngModel)]="productToUpdate.category_id"> -->
+            <mat-select formControlName="category" [(value)]="selected">
+                    <mat-option *ngFor="let category of categoryOptions" value="{{category.value}}">{{ category.name }}
                 </mat-option>
             </mat-select>
             <mat-error
@@ -76,4 +79,5 @@
 
     </div>
 
+    {{ registrationForm.value | json }}
 </form>

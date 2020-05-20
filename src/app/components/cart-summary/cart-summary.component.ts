@@ -13,6 +13,7 @@ export class CartSummaryComponent implements OnInit {
 
   cartItems: IcartItem[];
   totalPrice: number;
+  // displayedColumns = ['item', 'cost', 'cost'];
 
   constructor(private cartItemsService: CartItemsService, private router: Router) { }
 

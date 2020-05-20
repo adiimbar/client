@@ -56,6 +56,17 @@ export class CartItemsService {
       // );
   }
 
+  public updateCartItem (cartItem: IcartItem): Observable<IcartItem> {
+    const url = `${this.cartItemsUrl}`;
+    return this.http.put<IcartItem>(url, cartItem,httpOptions)
+      .pipe(tap(() => {
+        this.needToRefetchSubject.next(true);
+      }));
+      // .pipe(
+      //   catchError(this.handleError('updateProduct', hero))
+      // );
+  }
+
 
 }
 
