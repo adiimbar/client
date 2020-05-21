@@ -1,0 +1,15 @@
+.child-header-style {
+    background-color: lightskyblue;
+    height: 64px !important;
+    position: relative;
+}
+
+.child-vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* -ms-transform: translateY(-50%); */
+    /* transform: translateY(-50%); */
+}

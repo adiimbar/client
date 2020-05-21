@@ -13,7 +13,7 @@ import { UpdateProductDetails } from 'src/app/models/UpdateProductDetails';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css', '../../styles/childStyle.css']
 })
 export class AdminComponent implements OnInit {
 

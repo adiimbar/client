@@ -6,3 +6,13 @@
     width: 25%;
     min-width: 250px;
 }
+
+.back-button-style {
+    right: 40%;
+    top: 10px;
+}
+
+.order-header-style {
+    /* background-color: rebeccapurple !important; */
+    background-color: blueviolet !important;
+}

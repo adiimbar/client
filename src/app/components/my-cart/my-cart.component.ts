@@ -9,7 +9,7 @@ import { IcartItem } from 'src/app/models/cart-items';
 @Component({
   selector: 'app-my-cart',
   templateUrl: './my-cart.component.html',
-  styleUrls: ['./my-cart.component.css']
+  styleUrls: ['./my-cart.component.css', '../../styles/childStyle.css']
 })
 export class MyCartComponent implements OnInit {
 

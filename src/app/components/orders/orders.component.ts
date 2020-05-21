@@ -18,7 +18,7 @@ import autoTable, { autoTable as autoTableType} from 'jspdf-autotable';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  styleUrls: ['./orders.component.css', '../../styles/childStyle.css']
 })
 export class OrdersComponent implements OnInit {
 
@@ -166,8 +166,8 @@ export class OrdersComponent implements OnInit {
     })
   }
 
-  newDate() {
-    this.dialog.open(OrderDialogComponent);
+  BackToCartButton() {
+    console.log('BackToCartButton clicked');
+    this.router.navigate(["/store"]);
   }
-
 }

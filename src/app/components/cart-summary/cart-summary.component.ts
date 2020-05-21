@@ -7,7 +7,7 @@ import { IcartItem } from 'src/app/models/cart-items';
 @Component({
   selector: 'app-cart-summary',
   templateUrl: './cart-summary.component.html',
-  styleUrls: ['./cart-summary.component.css']
+  styleUrls: ['./cart-summary.component.css', '../../styles/childStyle.css']
 })
 export class CartSummaryComponent implements OnInit {
 
@@ -36,11 +36,6 @@ export class CartSummaryComponent implements OnInit {
     }
 
     return this.totalPrice
-  }
-
-  BackToCartButton() {
-    console.log('BackToCartButton clicked');
-    this.router.navigate(["/store"]);
   }
 
 }
