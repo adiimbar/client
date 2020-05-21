@@ -10,8 +10,6 @@ import { UpdateProductsService } from 'src/app/services/update-products.service'
 import { UpdateProductDetails } from 'src/app/models/UpdateProductDetails';
 
 
-
-
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -36,18 +34,18 @@ export class AdminComponent implements OnInit {
    public files = [];
    public uploadedImageName;
    public formSwitchValue = "addProduct";
+   public formUpdateConditionValue: boolean = false;
    public productToUpdate = new UpdateProductDetails();
 
-   selected = '9';
 
-  //  holds values for form data binding
-   public ordersFormValuesDummy = {
-    productName: '',
-    productId: 0,
-    productPrice: '',
-    productImage: '',
-    category: ''  
-   }
+  // //  holds values for form data binding
+  //  public ordersFormInitValues = {
+  //   product_name: '',
+  //   product_id: '',
+  //   price: '',
+  //   image_path: '',
+  //   category_id: ''  
+  //  }
  
 
   createForm() {
@@ -56,7 +54,8 @@ export class AdminComponent implements OnInit {
       productId: ['', []],
       // productPrice: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.min(0)]],
       productPrice: ['', [Validators.required, Validators.min(0)]],
-      productImage: [this.uploadedImageName, [Validators.required]],
+      productImage: ['', [Validators.required]],
+      // productImage: [this.uploadedImageName, [Validators.required]],
       category: ['', [Validators.required]]
     });
 }
@@ -74,6 +73,10 @@ export class AdminComponent implements OnInit {
     this._updateProductsService.itemToUpdate$
     .subscribe(
       item => {
+        if(this.formSwitchValue === 'addProduct') {
+          console.log('switching from add product to update product');
+          this.updateProductSwitchButton();
+        }
         // this.createForm();
         this.productToUpdate = item;
         this.setProductValuesToform(item);
@@ -96,12 +99,37 @@ export class AdminComponent implements OnInit {
   }
 
   updateProduct() {
-    console.log('update product was clicked');
+    if(this.registrationForm.value.productName && this.registrationForm.value.productPrice && this.productToUpdate.product_id) {
+      console.log('condition true');
+
+      this.registrationForm.value.productId = this.productToUpdate.product_id;
+
+      let newProduct: Iproduct[] = this.registrationForm.value;
+      console.log('newProduct:');
+      console.log(newProduct);
+
+      // let product = {
+      //   product_id: number this.registrationForm.value.productId,
+      //   product_name: this.registrationForm.value.productName,
+      //   category_id: this.registrationForm.value.category,
+      //   price: this.registrationForm.value.productPrice,
+      //   image_path: this.registrationForm.value.productImage
+      // }
+
+      this.productsService
+        .updateProduct(newProduct)
+        .subscribe(res => {
+          console.log('update response');
+          console.log(res);
+        });
+
+    }
+    // console.log('update product was clicked');
+
     // console.log(this.productToUpdate);
-    console.log(this.registrationForm.value);
+    // console.log(this.registrationForm.value);
 
   }
-
 
   setProductValuesToform(product) {
     this.registrationForm.value.productName = product.product_name;
@@ -109,23 +137,34 @@ export class AdminComponent implements OnInit {
     this.registrationForm.value.productPrice = product.price;
     this.registrationForm.value.productImage = product.image_path;
     this.registrationForm.value.category = product.category_id;
-    
-
-    // this.createForm();
-
-
-    // this.ordersFormValuesDummy = product;
-    // this.ordersFormValuesDummy.productName = product.product_name;
-
   }
 
-  formSwitchButton() {
-    if(this.formSwitchValue == 'addProduct') {
-      this.formSwitchValue = 'updateProduct';
-    } else if(this.formSwitchValue == 'updateProduct') {
-      this.formSwitchValue = 'addProduct';
-    }
+  addProductSwitchButton() {
+    this.formSwitchValue = 'addProduct';
+    this.createForm();
+
+    // might neeed to clear productToUpdate vlues to be empty strings
+    // this.setProductValuesToform(this.ordersFormInitValues);
   }
+
+  updateProductSwitchButton() {
+    this.formSwitchValue = 'updateProduct';
+    this.formUpdateConditionValue = false;
+    // this.productToUpdateValuesInit();
+    this.createForm();
+  }
+
+  updateImageAndCategorySwitchConditionButton() {
+    this.formUpdateConditionValue = true;
+  }
+
+  // productToUpdateValuesInit() {
+  //   // this.productToUpdate.product_name = '',
+  //   this.productToUpdate.product_id = null
+  //   // this.productToUpdate.price = null,
+  //   // this.productToUpdate.image_path = '',
+  //   // this.productToUpdate.category_id = null
+  // }
 
   onClick() {
     // Clearing the files from previous upload
@@ -175,7 +214,7 @@ export class AdminComponent implements OnInit {
         this.registrationForm.value.productImage = this.uploadedImageName;
         // this.productImagePath = this.uploadedImageName;
         // console.log(this.productImagePath);
-        console.log(this.registrationForm.value.productImage);
+        // console.log(this.registrationForm.value.productImage);
       }
     });
   }
@@ -183,7 +222,7 @@ export class AdminComponent implements OnInit {
   private uploadFiles() {
     this.fileUpload.nativeElement.value = '';
 
-    console.log("Amount of files to upload : " + this.files.length);
+    // console.log("Amount of files to upload : " + this.files.length);
     this.files.forEach(file => {
       this.uploadFile(file);
     });

@@ -1,0 +1,14 @@
+.button-style {
+    margin: 5px;
+}
+
+.upload-style {
+    /* width: 300px; */
+    margin-top:10px;
+    width: 50%;
+    margin-left:25%;
+}
+
+.input-style {
+    width: 300px;
+}
