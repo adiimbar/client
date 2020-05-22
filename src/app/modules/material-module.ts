@@ -16,6 +16,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -37,7 +38,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatProgressBarModule,
     MatIconModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule {}

@@ -89,6 +89,8 @@ export class LoginComponent implements OnInit {
           
           sessionStorage.setItem("token", "Bearer " + successfulServerRequestData.token+"");
           this.usersService.userType = successfulServerRequestData.userType;
+          sessionStorage.setItem("isLoggedIn", "true");
+
 
           if(successfulServerRequestData.userType == "CUSTOMER"){
               this.router.navigate(["/store"]);

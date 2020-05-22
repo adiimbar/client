@@ -31,7 +31,7 @@ export class UserService {
     }
 
     public addUser(userRegistrationDetails: UserRegistrationDetails): Observable<void> {
-      const url = `${this.userUrl}`;
+      const url = `${this.userUrl}/register`;
       return this.http.post<void>(url, userRegistrationDetails);
     }
 

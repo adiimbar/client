@@ -14,43 +14,17 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { OrdersPanelComponent }from './components/orders-panel/orders-panel.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { from } from 'rxjs';
+import { RouteGuard } from './route.guard';
 
 const routes: Routes = [
-  // { path: "home", component: LoginComponent },
 
-  { path: "", redirectTo: "home", pathMatch: "full" }, // pathMatch = התאמת המחרוזת הריקה לכלל הנתיב
+  { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: LoginPanelComponent },
   { path: "registration", component: RegistrationComponent },
-  { path: "store", component: MainPanelComponent},
-  { path: "admin", component: AdminPanelComponent},
-  // { path: "main",
-  //   component: MainPanelComponent,
-  //   children: [
-  //     // { path: "", redirectTo: "/store" },
-  //     { path: "products", component: ProductsComponent },
-  //     { path: "order", component: OrdersComponent }
-  //   ]
-  // },
-
-  { path: "orders",
-  component: OrdersPanelComponent,
-  // children: [
-  //   // { path: "", redirectTo: "/store" },
-  //   { path: "products", component: ProductsComponent },
-    // { path: "order", component: OrdersComponent }
-  // ]
-},
-  
-  
-
-  // { path: "products", canActivate: [LoginGuardService], component: ProductsComponent },
-  // { path: "users", canActivate: [LoginGuardService], component: UsersComponent },
-  // { path: "add-user", canActivate: [LoginGuardService], component: AddUserComponent },
-  // { path: "about", component: AboutComponent },
-  // { path: "customer", component: CustomerComponent },
-  // { path: "contact-us", component: ContactUsComponent },
-  // { path: "login", component: LoginComponent },
-  { path: "**", component: Page404Component } // Page not Found (Must be the last one!!!)
+  { path: "store", canActivate: [RouteGuard], component: MainPanelComponent},
+  { path: "admin", canActivate: [RouteGuard], component: AdminPanelComponent},
+  { path: "orders", canActivate: [RouteGuard], component: OrdersPanelComponent},
+  { path: "**", component: Page404Component }
 
 ];
 

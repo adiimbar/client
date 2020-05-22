@@ -8,7 +8,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Iproduct } from 'src/app/models/product';
 import { UpdateProductsService } from 'src/app/services/update-products.service';
 import { UpdateProductDetails } from 'src/app/models/UpdateProductDetails';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin',
@@ -27,7 +27,6 @@ export class AdminComponent implements OnInit {
     {name: "Wine & Drinks", value: 9}
   ];
 
-   // Enables getting a reference to the dom element who's named #fileUpload
    @ViewChild("fileUpload", { static: false })
    fileUpload: ElementRef;
  
@@ -38,24 +37,12 @@ export class AdminComponent implements OnInit {
    public productToUpdate = new UpdateProductDetails();
 
 
-  // //  holds values for form data binding
-  //  public ordersFormInitValues = {
-  //   product_name: '',
-  //   product_id: '',
-  //   price: '',
-  //   image_path: '',
-  //   category_id: ''  
-  //  }
- 
-
   createForm() {
     this.registrationForm = this.fb.group({
       productName: ['', [Validators.required]],
       productId: ['', []],
-      // productPrice: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.min(0)]],
       productPrice: ['', [Validators.required, Validators.min(0)]],
       productImage: ['', [Validators.required]],
-      // productImage: [this.uploadedImageName, [Validators.required]],
       category: ['', [Validators.required]]
     });
 }
@@ -64,7 +51,8 @@ export class AdminComponent implements OnInit {
     private fb: FormBuilder,
     private uploadService: UploadService,
     private productsService: ProductsService,
-    private _updateProductsService: UpdateProductsService) { }
+    private _updateProductsService: UpdateProductsService,
+    private _snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
@@ -74,7 +62,6 @@ export class AdminComponent implements OnInit {
     .subscribe(
       item => {
         if(this.formSwitchValue === 'addProduct') {
-          console.log('switching from add product to update product');
           this.updateProductSwitchButton();
         }
         // this.createForm();
@@ -86,35 +73,26 @@ export class AdminComponent implements OnInit {
 
   saveproduct() {
 
-    if(this.registrationForm.valid) {
+    if(this.registrationForm.value.productName && this.registrationForm.value.productPrice && this.uploadedImageName && this.registrationForm.value.category) {
 
       this.registrationForm.value.productImage = this.uploadedImageName;  
       let newProduct: Iproduct[] = this.registrationForm.value;
   
       this.productsService
         .addProduct(newProduct)
-        .subscribe();  
+        .subscribe();
+      
+      this.openSnackBar('Item added', 'Dismiss');
     }
 
   }
 
   updateProduct() {
     if(this.registrationForm.value.productName && this.registrationForm.value.productPrice && this.productToUpdate.product_id) {
-      console.log('condition true');
 
       this.registrationForm.value.productId = this.productToUpdate.product_id;
 
       let newProduct: Iproduct[] = this.registrationForm.value;
-      console.log('newProduct:');
-      console.log(newProduct);
-
-      // let product = {
-      //   product_id: number this.registrationForm.value.productId,
-      //   product_name: this.registrationForm.value.productName,
-      //   category_id: this.registrationForm.value.category,
-      //   price: this.registrationForm.value.productPrice,
-      //   image_path: this.registrationForm.value.productImage
-      // }
 
       this.productsService
         .updateProduct(newProduct)
@@ -123,11 +101,9 @@ export class AdminComponent implements OnInit {
           console.log(res);
         });
 
-    }
-    // console.log('update product was clicked');
+      this.openSnackBar('Item added', 'Dismiss');
 
-    // console.log(this.productToUpdate);
-    // console.log(this.registrationForm.value);
+    }
 
   }
 
@@ -143,14 +119,11 @@ export class AdminComponent implements OnInit {
     this.formSwitchValue = 'addProduct';
     this.createForm();
 
-    // might neeed to clear productToUpdate vlues to be empty strings
-    // this.setProductValuesToform(this.ordersFormInitValues);
   }
 
   updateProductSwitchButton() {
     this.formSwitchValue = 'updateProduct';
     this.formUpdateConditionValue = false;
-    // this.productToUpdateValuesInit();
     this.createForm();
   }
 
@@ -158,13 +131,9 @@ export class AdminComponent implements OnInit {
     this.formUpdateConditionValue = true;
   }
 
-  // productToUpdateValuesInit() {
-  //   // this.productToUpdate.product_name = '',
-  //   this.productToUpdate.product_id = null
-  //   // this.productToUpdate.price = null,
-  //   // this.productToUpdate.image_path = '',
-  //   // this.productToUpdate.category_id = null
-  // }
+  openSnackBar(message, action) {
+    this._snackBar.open(message, action, {duration: 1000});
+  }
 
   onClick() {
     // Clearing the files from previous upload
@@ -176,7 +145,7 @@ export class AdminComponent implements OnInit {
 
       for (let index = 0; index < fileUpload.files.length; index++) {
         const file = fileUpload.files[index];
-        console.log("Uploaded file :" + file);
+        // console.log("Uploaded file :" + file);
         this.files.push({ name: file.name, data: file, inProgress: false, progress: 0 });
       }
       this.uploadFiles();
@@ -209,7 +178,7 @@ export class AdminComponent implements OnInit {
 
     observable.subscribe((event: any) => {
       if (typeof (event) === 'object' && event.body) {
-        console.log("Body : " + JSON.stringify(event.body));
+        // console.log("Body : " + JSON.stringify(event.body));
         this.uploadedImageName = "http://localhost:3000/uploads/" + event.body.name;
         this.registrationForm.value.productImage = this.uploadedImageName;
         // this.productImagePath = this.uploadedImageName;
