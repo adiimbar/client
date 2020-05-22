@@ -53,7 +53,7 @@
             <mat-label>Credit card</mat-label>
             <input matInput formControlName="creditCard" type="text">
             <mat-error *ngIf="!orderForm.controls['creditCard'].valid && orderForm.controls['creditCard'].touched">
-                {{ requiredAlert }}
+                {{ getErrorCreditCard() }}
             </mat-error>
         </mat-form-field>
         <br>

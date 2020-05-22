@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Iproduct } from '../models/product';
-import { IaddProduct} from '../models/addProduct';
+// import { IaddProduct} from '../models/addProduct';
 
 
 @Injectable({

@@ -37,19 +37,19 @@ export class OrdersComponent implements OnInit {
   orderForm: FormGroup;
   requiredAlert: string = 'field is required';
   minDate: any;
-  // minDate: Date;
-  // maxDate: Date;  
 
   public orderDetails: OrderDetails
 
   createForm() {
 
     this.orderForm = this.fb.group({
-      // city: [this.userDetails.city, [Validators.required]],
       city: ['', [Validators.required]],
       street: ['', [Validators.required]],
       shippingDate: ['', [Validators.required]],
-      creditCard: ['', [Validators.required]]
+      creditCard: ['', [
+        Validators.required,
+        Validators.pattern(/^\d{16}$/)
+      ]]
     });
   }
 
@@ -62,10 +62,6 @@ export class OrdersComponent implements OnInit {
 
     this.minDate = moment().format('YYYY-MM-DD');
 
-    // const currentYear = new Date().getFullYear();
-    // this.minDate = new Date();
-    // this.maxDate = new Date(currentYear + 1, 11, 31);
-    // this.orderDetails = new OrderDetails();
   }
 
   ngOnInit() {
@@ -91,19 +87,21 @@ export class OrdersComponent implements OnInit {
       .subscribe();
   }
 
-
-
   //   // Prevent Saturday from being selected.  
   // myFilter = (d: Date | null): boolean => {
   //   const day = (d || new Date()).getDay();
   //   return day !== 6;
   // }
 
+  getErrorCreditCard() {
+    return this.orderForm.get('creditCard').hasError('required') ? 'Field is required' :
+      this.orderForm.get('creditCard').hasError('pattern') ? 'Not a valid card number' : '';
+  }
+
+
   orderClick() {
 
     if (this.orderForm.valid) {
-      // // need to move the call
-      // //first need to make sure the user want to order
       this.ordersService
       .addOrder(this.orderForm.value)
       .subscribe(res => console.log(res));
@@ -115,7 +113,6 @@ export class OrdersComponent implements OnInit {
 
     }
     else {
-      console.log('form not valid');
     }
 
   }
@@ -142,7 +139,6 @@ export class OrdersComponent implements OnInit {
 
   sumUpTotalPrice() {
     this.totalPrice = 0;
-    // console.log(this.cartItems);
     for (let value of Object.values(this.cartItems)) {
       this.totalPrice = this.totalPrice + (Number(value.price) * value.quantity);
     }
@@ -157,17 +153,14 @@ export class OrdersComponent implements OnInit {
     let dialogRef = this.dialog.open(OrderDialogComponent, {data: {name: this.userModel.firstName}});
 
     dialogRef.afterClosed().subscribe( downloadReceipt => {
-      console.log(typeof(downloadReceipt));
       if(downloadReceipt === 'true') {
         this.createPdf();
       }
 
-      console.log(`dialog downloadReceipt value: ${downloadReceipt}`)
     })
   }
 
   BackToCartButton() {
-    console.log('BackToCartButton clicked');
     this.router.navigate(["/store"]);
   }
 }

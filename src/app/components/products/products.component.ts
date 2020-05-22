@@ -6,7 +6,7 @@ import { IcartItem } from 'src/app/models/cart-items';
 // import { IdialogData } from 'src/app/models/dialog-data';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 // import { Mock } from 'protractor/built/driverProviders';
-import { UploadService } from 'src/app/services/upload.service';
+// import { UploadService } from 'src/app/services/upload.service';
 
 
 @Component({
