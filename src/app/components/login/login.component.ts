@@ -4,6 +4,8 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { checkPassword } from 'src/app/validators/check-password.validator';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { RegistrationComponent } from '../registration/registration.component';
 
 
 // import { url } from ("src/app/styles/buttons.css");
@@ -62,7 +64,7 @@ export class LoginComponent implements OnInit {
   public userLoginDetails: UserLoginDetails;
   private usersService: UserService;
 
-  constructor(usersService: UserService, private router: Router, private fb: FormBuilder) {
+  constructor(usersService: UserService, private router: Router, private fb: FormBuilder, public dialog: MatDialog) {
       this.userLoginDetails = new UserLoginDetails();
       this.usersService = usersService;
   }
@@ -110,9 +112,22 @@ export class LoginComponent implements OnInit {
 
   }
 
-  registration() {
-    this.router.navigate(["/registration"]);
+  openRegistrationDialog() {
+    let dialogRef = this.dialog.open(RegistrationComponent, {
+      height: '430px',
+      width: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // if(result === 'true') {
+      // }
+    })
   }
+
+  // registration() {
+  //   this.router.navigate(["/registration"]);
+
+  // }
 
 }
 

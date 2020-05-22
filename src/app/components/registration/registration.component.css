@@ -1,5 +1,21 @@
-section {
-    height: 100%;
-    background-color: deepskyblue;
-   }
+.button-style {
+    margin: 5px;
+}
+
+.input-style {
+    width: 100%;
+}
+
+.child-header-style {
+    height: 64px !important;
+    position: relative;
+}
+
+.child-vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 

@@ -76,7 +76,7 @@ import { OrderDialogComponent } from './components/order-dialog/order-dialog.com
 
 
   ],
-  entryComponents: [OrderDialogComponent],
+  entryComponents: [OrderDialogComponent, RegistrationComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,68 +1,58 @@
+
+
 <section>
 
+    <div class="child-header-style">
+        <div class="child-vertical-center">
+            <h2>Registration</h2>
+        </div>
+    </div>    
+
+
+<div class="form-container">
+
+<div class="form-center-style">
 
 <form [formGroup]="registrationForm">
   
-    <span>
-        <mat-form-field class="example-full-width">
+    <div *ngIf="registrationStep === 'stepOne'">
+        <mat-form-field class="input-style">
             <mat-label>ID Number</mat-label>
             <input #idRef matInput formControlName="identificationNumber">
             <mat-error *ngIf="!registrationForm.controls['identificationNumber'].valid && registrationForm.controls['identificationNumber'].touched">
-                {{ requiredAlert }}
+                {{ getErrorIdentificationNumber() }}
             </mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="input-style">
             <mat-label>Email</mat-label>
-            <!-- <input matInput formControlName="email" [errorStateMatcher]="matcher"> -->
             <input matInput formControlName="email">
             <mat-error *ngIf="!registrationForm.controls['email'].valid && registrationForm.controls['email'].touched">
                 {{ getErrorEmail() }}
             </mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field>
+        <mat-form-field class="input-style">
             <mat-label>Password</mat-label>
             <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
-            <!-- <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number</mat-hint> -->
             <mat-error *ngIf="!registrationForm.controls['password'].valid && registrationForm.controls['password'].touched">
                 {{ getErrorPassword() }}
             </mat-error>
-            <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button> -->
+           
         </mat-form-field>
         <br>
-        <mat-form-field>
+        <mat-form-field class="input-style">
             <mat-label>Confirm password</mat-label>
             <input matInput formControlName="confirmPassword" [type]="hide ? 'password' : 'text'">
-                <!-- [errorStateMatcher]="errorMatcher"> -->
-            <!-- <mat-error *ngIf="registrationForm.hasError('passwordsDoNotMatch')">
-                Passwords do not match
-            </mat-error> -->
-
-            
-            <!-- <mat-error *ngif="!registrationForm.controls['confirmPassword'].valid && registrationForm.controls['confirmPassword'].touched">
-                Passwords do not match {{ requiredAlert }}
-            </mat-error> -->
-            <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button> -->
+            <mat-error *ngIf="!registrationForm.controls['confirmPassword'].valid && registrationForm.controls['confirmPassword'].touched">
+                {{ getErrorPassword() }}
+            </mat-error>
         </mat-form-field>
-        <!-- <div class="example-button-row">
-            <button mat-raised-button (click)="next()" (click)="formNextButton()" [disabled]="
-                !registrationForm.controls['identificationNumber'].valid ||
-                !registrationForm.controls['email'].valid ||
-                !registrationForm.controls['password'].touched ||
-                !registrationForm.controls['confirmPassword'].touched">
-                Next
-            </button>
-        </div> -->
 
-    </span>
+    </div>
     <br>
-    <span>
-        <mat-form-field>
+    <div *ngIf="registrationStep === 'stepTwo'">
+        <mat-form-field class="input-style">
             <mat-label>City</mat-label>
             <mat-select formControlName="city">
                 <mat-option *ngFor="let city of cityOptions" value="{{city}}">{{city}}</mat-option>
@@ -72,7 +62,7 @@
             </mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="input-style">
             <mat-label>Street</mat-label>
             <input matInput formControlName="street" type="text">
             <mat-error *ngIf="!registrationForm.controls['street'].valid && registrationForm.controls['street'].touched">
@@ -80,7 +70,7 @@
             </mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="input-style">
             <mat-label>First Name</mat-label>
             <input matInput formControlName="firstName" type="text">
             <mat-error *ngIf="!registrationForm.controls['firstName'].valid && registrationForm.controls['firstName'].touched">
@@ -88,23 +78,40 @@
             </mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="input-style">
             <mat-label>Last Name</mat-label>
             <input matInput formControlName="lastName" type="text">
             <mat-error *ngIf="!registrationForm.controls['lastName'].valid && registrationForm.controls['lastName'].touched">
                 {{ requiredAlert }}
             </mat-error>
         </mat-form-field>
+    </div>
+
         <br>
-        <div class="example-button-row">
-            <button mat-raised-button style="margin: 5px;" (click)="back()">Back</button>
-            <button mat-raised-button (click)="submitSignUp()" type="submit">submit</button>
+        <div class="button-row">
+            <div style="float: left; width: 74%;">
+                <button mat-raised-button color="primary" class="button-style" (click)="formNextButton()" *ngIf="registrationStep === 'stepOne'"
+                    [disabled]="!registrationForm.controls['identificationNumber'].valid ||
+                                !registrationForm.controls['email'].valid ||
+                                !registrationForm.controls['password'].valid ||
+                                !registrationForm.controls['confirmPassword'].valid"
+                >Next</button>
+                <button mat-raised-button color="primary" class="button-style" (click)="formBackButton()" *ngIf="registrationStep === 'stepTwo'">Back</button>
+                <button mat-raised-button color="primary" class="button-style" (click)="submitSignUp()" type="submit" *ngIf="registrationStep === 'stepTwo'">submit</button>
+            </div>
+            <div>
+                <button mat-raised-button color="primary" class="button-style" mat-dialog-close>Close</button>
+            </div>
         </div>
 
-    </span>
 
         <!-- {{registrationForm.value | json}} -->
 
   </form>
+
+</div>
+
+</div>
+
 
 </section>
