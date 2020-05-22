@@ -11,18 +11,11 @@ import { MaterialModule } from './modules/material-module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationInterceptor } from './interceptors/AuthenticationInterceptor';
-// import { UserService } from './services/user.service';
-// import { ProductsService } from './services/products.service';
 
-
-// youtube #23 - Routing and Navigation
-// we can prevent importing the same component twice
 import { LayoutComponent } from './components/layout/layout.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
-import { MenuComponent } from './components/menu/menu.component';
-// import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { MainPanelComponent } from './components/main-panel/main-panel.component';
 import { AboutComponent } from './components/about/about.component';
@@ -49,30 +42,23 @@ import { OrderDialogComponent } from './components/order-dialog/order-dialog.com
     FooterComponent,
     HeaderComponent,
     LoginComponent,
-    MenuComponent,
-    // RegisterComponent,
     AdminComponent,
     MainPanelComponent,
     AboutComponent,
     StoreInfoComponent,
     LoginPanelComponent,
-    // SignInComponent,
     RegistrationComponent,
     MyCartComponent,
     ProductsComponent,
     OrdersComponent,
+    OrdersPanelComponent,
+    CartSummaryComponent,
+    AdminPanelComponent,
+    AdminProductsComponent,
+    OrderDialogComponent,
 
     routingComponents,
 
-    OrdersPanelComponent,
-
-    CartSummaryComponent,
-
-    AdminPanelComponent,
-
-    AdminProductsComponent,
-
-    OrderDialogComponent,
 
 
   ],
@@ -89,8 +75,6 @@ import { OrderDialogComponent } from './components/order-dialog/order-dialog.com
     MatNativeDateModule
   ],
   providers: [
-    // UserService,
-    // ProductsService,
 
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
 

@@ -1,37 +1,34 @@
 <mat-toolbar color="primary">
 
-    <section>
-        <div class="products-menu">
-          <button mat-button *ngFor="let category of categoryOptions" (click)="categoryButton(category.value)">{{category.name}}</button>
-          <span style="right: 10px;">
-            <input [(ngModel)]="itemSearchValue" class="product-search-style" type="text" placeholder="Search a product">
-            <button mat-button (click)="searchItemButton()">Search</button>
-          </span>
+  <section>
+    <div class="products-menu">
+      <button mat-button *ngFor="let category of categoryOptions"
+        (click)="categoryButton(category.value)">{{category.name}}</button>
+      <span style="right: 10px;">
+        <input [(ngModel)]="itemSearchValue" class="product-search-style" type="text" placeholder="Search a product">
+        <button mat-button (click)="searchItemButton()">Search</button>
+      </span>
 
-        </div>
-    </section>
+    </div>
+  </section>
 
 </mat-toolbar>
-
-<!-- <div *ngIf="products.length !== 0">
-  <h2>Click items to update</h2>
-</div> -->
 
 <div *ngIf="products.length == 0">
   <h1>No item matching that name was found</h1>
 </div>
 
 <mat-card class="card-div" *ngFor="let product of products" (click)="updateCartButton(this.product)">
-    <!-- <a role="button" > -->
-      <mat-card-header>
-      </mat-card-header>
-      <img mat-card-image src="{{product.image_path}}" alt="product Photo" class="productImageClass">
-      <mat-card-content>
-        <p>
-          {{product.product_name}}
-          <br>
-          {{product.price | currency:'ILS'}}
-        </p>
-      </mat-card-content>
-      <!-- </a> -->
-  </mat-card>
+  <!-- <a role="button" > -->
+  <mat-card-header>
+  </mat-card-header>
+  <img mat-card-image src="{{product.image_path}}" alt="product Photo" class="productImageClass">
+  <mat-card-content>
+    <p>
+      {{product.product_name}}
+      <br>
+      {{product.price | currency:'ILS'}}
+    </p>
+  </mat-card-content>
+  <!-- </a> -->
+</mat-card>

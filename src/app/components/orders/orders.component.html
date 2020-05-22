@@ -9,59 +9,49 @@
 </div>
 
 <div class="form-div">
-<form [formGroup]="orderForm" class="form-class">
-  
-    <div>
-        <mat-form-field class="field-style">
-            <mat-label>City</mat-label>
-            <mat-select formControlName="city" [(ngModel)]="userModel.city">
-                <mat-option *ngFor="let city of cityOptions" value="{{city}}">{{city}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="!orderForm.controls['city'].valid && orderForm.controls['city'].touched">
-                {{ requiredAlert }}
-            </mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field class="field-style">
-            <mat-label>Street</mat-label>
-            <input matInput formControlName="street" type="text" [(ngModel)]="userModel.street">
-            <mat-error *ngIf="!orderForm.controls['street'].valid && orderForm.controls['street'].touched">
-                {{ requiredAlert }}
-            </mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field class="field-style">
-            <mat-label>Choose a date</mat-label>
-            <!-- <input matInput formControlName="shippingDate" [matDatepickerFilter]="myFilter" [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker> -->
-            <input matInput formControlName="shippingDate" type="date" min="{{minDate}}">
-            <mat-error *ngIf="!orderForm.controls['shippingDate'].valid && orderForm.controls['shippingDate'].touched">
-                {{ requiredAlert }}
-            </mat-error>
-        </mat-form-field>
+    <form [formGroup]="orderForm" class="form-class">
 
-        <!-- <mat-form-field class="field-style">
-            <mat-label>ShippingDate</mat-label>
-            <input matInput formControlName="shippingDate" type="date">
-            <mat-error *ngIf="!orderForm.controls['shippingDate'].valid && orderForm.controls['shippingDate'].touched">
-                {{ requiredAlert }}
-            </mat-error>
-        </mat-form-field> -->
-        <br>
-        <mat-form-field class="field-style">
-            <mat-label>Credit card</mat-label>
-            <input matInput formControlName="creditCard" type="text">
-            <mat-error *ngIf="!orderForm.controls['creditCard'].valid && orderForm.controls['creditCard'].touched">
-                {{ getErrorCreditCard() }}
-            </mat-error>
-        </mat-form-field>
-        <br>
-        <div class="example-button-row">
-            <button mat-raised-button (click)="orderClick()" type="submit">Order</button>
+        <div>
+            <mat-form-field class="field-style">
+                <mat-label>City</mat-label>
+                <mat-select formControlName="city" [(ngModel)]="userModel.city">
+                    <mat-option *ngFor="let city of cityOptions" value="{{city}}">{{city}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="!orderForm.controls['city'].valid && orderForm.controls['city'].touched">
+                    {{ requiredAlert }}
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="field-style">
+                <mat-label>Street</mat-label>
+                <input matInput formControlName="street" type="text" [(ngModel)]="userModel.street">
+                <mat-error *ngIf="!orderForm.controls['street'].valid && orderForm.controls['street'].touched">
+                    {{ requiredAlert }}
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="field-style">
+                <mat-label>Choose a date</mat-label>
+                <input matInput formControlName="shippingDate" type="date" min="{{minDate}}">
+                <mat-error
+                    *ngIf="!orderForm.controls['shippingDate'].valid && orderForm.controls['shippingDate'].touched">
+                    {{ requiredAlert }}
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="field-style">
+                <mat-label>Credit card</mat-label>
+                <input matInput formControlName="creditCard" type="text">
+                <mat-error *ngIf="!orderForm.controls['creditCard'].valid && orderForm.controls['creditCard'].touched">
+                    {{ getErrorCreditCard() }}
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <div class="example-button-row">
+                <button mat-raised-button (click)="orderClick()" type="submit">Order</button>
+            </div>
+
         </div>
 
-    </div>
-
-  </form>
+    </form>
 </div>

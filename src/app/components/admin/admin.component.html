@@ -13,7 +13,8 @@
 
     <br>
     <div>
-        <button mat-raised-button class="button-style" (click)="addProductSwitchButton()" type="button">Add product</button>
+        <button mat-raised-button class="button-style" (click)="addProductSwitchButton()" type="button">Add
+            product</button>
         <!-- <button mat-raised-button class="button-style" (click)="updateProductSwitchButton()" type="button">Update product</button> -->
     </div>
 
@@ -39,7 +40,8 @@
         </mat-form-field>
         <br>
 
-        <a mat-raised-button *ngIf="formSwitchValue == 'updateProduct' && !formUpdateConditionValue" (click)="updateImageAndCategorySwitchConditionButton()">click to change product image or category</a>
+        <a mat-raised-button *ngIf="formSwitchValue == 'updateProduct' && !formUpdateConditionValue"
+            (click)="updateImageAndCategorySwitchConditionButton()">click to change product image or category</a>
 
         <div *ngIf="formSwitchValue == 'addProduct' || formUpdateConditionValue">
 
@@ -63,7 +65,8 @@
                         </button>
                     </mat-card-actions>
                 </mat-card>
-                <input type="file" #fileUpload id="fileUpload" name="fileUpload" accept="image/*" style="display:none;" />
+                <input type="file" #fileUpload id="fileUpload" name="fileUpload" accept="image/*"
+                    style="display:none;" />
             </div>
 
 
@@ -72,12 +75,13 @@
             <mat-form-field class="input-style">
                 <mat-label>Category</mat-label>
                 <mat-select formControlName="category" [(ngModel)]="productToUpdate.category_id">
-                <!-- <mat-select formControlName="category" [(ngModel)]="selected"> -->
+                    <!-- <mat-select formControlName="category" [(ngModel)]="selected"> -->
                     <mat-option *ngFor="let category of categoryOptions" value="{{category.value}}">
                         {{ category.name }}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="!registrationForm.controls['category'].valid && registrationForm.controls['category'].touched">
+                <mat-error
+                    *ngIf="!registrationForm.controls['category'].valid && registrationForm.controls['category'].touched">
                     {{ requiredAlert }}
                 </mat-error>
             </mat-form-field>
@@ -86,14 +90,11 @@
 
         <br>
         <div class="button">
-            <button mat-raised-button class="button-style" (click)="saveproduct()" [disabled]="formSwitchValue !== 'addProduct'" type="submit">Add</button>
-            <button mat-raised-button class="button-style" (click)="updateProduct()" [disabled]="formSwitchValue !== 'updateProduct'" type="submit">Update</button>
-
-                <!-- <button mat-raised-button (click)="saveproduct()" type="submit"
-                *ngIf="formSwitchValue == 'addProduct'">Add</button>
-            <button mat-raised-button (click)="updateProduct()" type="submit"
-                *ngIf="formSwitchValue == 'updateProduct'">Update</button> -->
-            </div>
+            <button mat-raised-button class="button-style" (click)="saveproduct()"
+                [disabled]="formSwitchValue !== 'addProduct'" type="submit">Add</button>
+            <button mat-raised-button class="button-style" (click)="updateProduct()"
+                [disabled]="formSwitchValue !== 'updateProduct'" type="submit">Update</button>
+        </div>
 
     </div>
 

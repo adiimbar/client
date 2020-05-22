@@ -1,14 +1,15 @@
 <mat-toolbar color="primary">
 
-    <section>
-        <div class="products-menu">
-          <button mat-button *ngFor="let category of categoryOptions" (click)="categoryButton(category.value)">{{category.name}}</button>
-          <span style="right: 10px;">
-              <input [(ngModel)]="itemSearchValue" class="product-search-style" type="text" placeholder="Search a product">
-              <button mat-button (click)="searchItemButton()">Search</button>
-          </span>
-        </div>
-    </section>
+  <section>
+    <div class="products-menu">
+      <button mat-button *ngFor="let category of categoryOptions"
+        (click)="categoryButton(category.value)">{{category.name}}</button>
+      <span style="right: 10px;">
+        <input [(ngModel)]="itemSearchValue" class="product-search-style" type="text" placeholder="Search a product">
+        <button mat-button (click)="searchItemButton()">Search</button>
+      </span>
+    </div>
+  </section>
 
 </mat-toolbar>
 
@@ -17,15 +18,14 @@
 </div>
 
 <mat-card class="card-div" *ngFor="let product of products" (click)="productDialog(this.product)">
-      <mat-card-header>
-      </mat-card-header>
-      <img mat-card-image src="{{product.image_path}}" alt="product Photo" class="productImageClass">
-      <mat-card-content>
-        <p>
-          {{product.product_name}}
-          <br>
-          {{product.price | currency:'ILS'}}
-        </p>
-      </mat-card-content>
-  </mat-card>
-
+  <mat-card-header>
+  </mat-card-header>
+  <img mat-card-image src="{{product.image_path}}" alt="product Photo" class="productImageClass">
+  <mat-card-content>
+    <p>
+      {{product.product_name}}
+      <br>
+      {{product.price | currency:'ILS'}}
+    </p>
+  </mat-card-content>
+</mat-card>

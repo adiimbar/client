@@ -8,10 +8,6 @@ section {
     grid-template-columns: repeat(12, 1fr); /* 12 columns */
 }
 
-/* section > * {
-    border: 2px solid black;
-} */
-
 .loginStyle, .aboutStyle , .storeInfoStyle {
     grid-column: span 4;
 

@@ -1,19 +1,13 @@
 import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import {LoginComponent} from './components/login/login.component';
 import { LoginPanelComponent } from './components/login-panel/login-panel.component';
-// import { CustomerComponent } from './components/customer/customer.component';
 import { Page404Component } from './components/page404/page404.component';
-// import { SignInComponent } from './components/registration/registration.component';
-// import { RegisterComponent } from './components/register/register.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { MainPanelComponent } from './components/main-panel/main-panel.component';
-import { ProductsComponent } from './components/products/products.component';
-import { OrdersComponent } from './components/orders/orders.component';
 import { OrdersPanelComponent }from './components/orders-panel/orders-panel.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
-import { from } from 'rxjs';
+// import { from } from 'rxjs';
 import { RouteGuard } from './route.guard';
 
 const routes: Routes = [

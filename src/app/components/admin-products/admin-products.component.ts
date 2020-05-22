@@ -1,10 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { Iproduct } from 'src/app/models/product';
-// import { IcartItem } from 'src/app/models/cart-items';
-// import { IdialogData } from 'src/app/models/dialog-data';
 import { MatDialog } from '@angular/material/dialog';
-// import { Mock } from 'protractor/built/driverProviders';
 import { UploadService } from 'src/app/services/upload.service';
 import { UpdateProductsService } from 'src/app/services/update-products.service';
 
@@ -51,7 +48,11 @@ export class AdminProductsComponent implements OnInit {
 
   updateCartButton(product) {
     // console.log(product);
-    this._updateProductsService.pushItemDetails(product);
+    // create a copy without a reference 
+    let productClone = JSON.parse(JSON.stringify(product));
+    this._updateProductsService.pushItemDetails(productClone);
+
+    // this._updateProductsService.pushItemDetails(product);
   }
 
 

@@ -101,7 +101,7 @@ export class AdminComponent implements OnInit {
           console.log(res);
         });
 
-      this.openSnackBar('Item added', 'Dismiss');
+      this.openSnackBar('Item updated', 'Dismiss');
 
     }
 

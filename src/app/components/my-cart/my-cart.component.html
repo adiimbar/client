@@ -6,21 +6,19 @@
 
 
 <div>
-    <!-- <div class="example-container mat-elevation-z8" *ngFor="let cartItem of cartItems"> -->
     <div class="tableContainer mat-elevation-z8">
         <table mat-table [dataSource]="cartItems">
-            
+
             <!-- Image Column -->
             <ng-container matColumnDef="image_path">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <!-- <td mat-cell *matCellDef="let IcartItems"> {{IcartItems.product_id}} </td> -->
-                
-                <td mat-cell *matCellDef="let cartItem"> 
+                <td mat-cell *matCellDef="let cartItem">
                     <div class="closingButtonDiv" style="float: left; position: relative; top: 37px; left: -5px;">
-                        <a class="closingButton" (click)="deleteItem(cartItem.product_id)" style="cursor: pointer;">&#10006;</a>
-                      </div>
-    
-                    <img mat-card-image src="{{cartItem.image_path}}" alt="product Photo" class="productImageClass" > 
+                        <a class="closingButton" (click)="deleteItem(cartItem.product_id)"
+                            style="cursor: pointer;">&#10006;</a>
+                    </div>
+
+                    <img mat-card-image src="{{cartItem.image_path}}" alt="product Photo" class="productImageClass">
                 </td>
                 <td mat-footer-cell *matFooterCellDef>
                     <button mat-raised-button (click)="emptyCartButton()">Empty cart</button>
@@ -30,7 +28,7 @@
             <!-- Item name Column -->
             <ng-container matColumnDef="product_name">
                 <th mat-header-cell *matHeaderCellDef> Product name </th>
-                <td mat-cell *matCellDef="let cartItem"  id="{{cartItem.product_id}}"> {{cartItem.product_name}}</td>
+                <td mat-cell *matCellDef="let cartItem" id="{{cartItem.product_id}}"> {{cartItem.product_name}}</td>
                 <td mat-footer-cell *matFooterCellDef></td>
             </ng-container>
 
@@ -47,14 +45,10 @@
 
                 <td mat-cell *matCellDef="let cartItem" style="min-width: 130px;">
                     <button (click)="decreament(cartItem)" type="button" class="cartQuantityButton">-</button>
-                    <input readonly=""  value="{{cartItem.quantity}}" type="text" class="cartQuantityInput">
+                    <input readonly="" value="{{cartItem.quantity}}" type="text" class="cartQuantityInput">
                     <button (click)="increament(cartItem)" type="button" class="cartQuantityButton">+</button>
-                    <!-- <button (click)="cartItem.quantity = cartItem.quantity + 1" type="button" class="cartQuantityButton">+</button> -->
                 </td>
 
-                <!-- <td mat-cell *matCellDef="let cartItem"> {{cartItem.quantity}} </td> -->
-                
-                
                 <td mat-footer-cell *matFooterCellDef>
                     <button mat-raised-button (click)="placeOrder()" type="submit">Check out</button>
                 </td>
