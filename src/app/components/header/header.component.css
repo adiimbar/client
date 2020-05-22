@@ -1,15 +1,29 @@
-/* div {
-    height: 100%;
-}
-
-h1 {
-    margin: 0;
+.header-style {
+    /* background-color: lightskyblue; */
+    /* height: 64px !important; */
     position: relative;
-    top: 50%;
-    font-size: 40px;
-    transform: translateY(-50%);
-} */
-
-div {
-    float: left;
 }
+
+.vertical-center {
+    /* margin: 0; */
+    position: absolute;
+    margin-top: 20px;
+    left: 3%;
+    /* transform: translate(-50%, -50%); */
+    /* -ms-transform: translateY(-50%); */
+    /* transform: translateY(-50%); */
+}
+
+.logo-div {
+    font-size: 40px;
+}
+
+
+.logo-span-one {
+    color: #4CAF50;
+}
+
+.logo-div:hover {
+    color: #4CAF50 !important;
+}
+
