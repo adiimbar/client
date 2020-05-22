@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
   productsCompare = [];
   public itemSearchValue: string = '';
   categoryOptions = [
-    {name: 'All products', value: null},
+    // {name: 'All products', value: null},
     {name: 'Milk & Eggs', value: 5},
     {name: 'Vegetables & Fruits', value: 6},
     {name: "Meat & Fish", value: 7},
@@ -42,7 +42,8 @@ export class ProductsComponent implements OnInit {
   // }
 
   ngOnInit() {
-    this.getAllProducts();
+    // this.getAllProducts();
+    this.getAllProductsByCategoryId(5);
   }
 
   getAllProducts() {

@@ -12,9 +12,9 @@
     right: -10px;
 }
 
-/* .closingButton:hover {
-    background-color: gray;
-} */
+.closingButton:hover {
+    color: red;
+}
 
 .card-div {
     padding-top: 10px;              
@@ -46,3 +46,13 @@
     width: 150px;
     height: 200px;
 }
+
+.product-search-style {
+    color: white;
+    background-color: #3f51b5;
+}
+
+::placeholder {
+    color: white;
+    opacity: 1; /* Firefox */
+  }

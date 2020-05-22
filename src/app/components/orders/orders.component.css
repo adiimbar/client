@@ -1,5 +1,5 @@
 .form-div {
-    margin-top: 100px;
+    margin-top: 10%;
 }
 
 .field-style {
@@ -8,11 +8,12 @@
 }
 
 .back-button-style {
-    right: 40%;
+    margin: 10px;
+    right: 37%;
     top: 10px;
 }
 
 .order-header-style {
     /* background-color: rebeccapurple !important; */
-    background-color: blueviolet !important;
+    background-color: #9c27b0 !important;
 }

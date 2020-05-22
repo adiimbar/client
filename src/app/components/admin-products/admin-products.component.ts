@@ -19,7 +19,7 @@ export class AdminProductsComponent implements OnInit {
   public itemSearchValue: string = '';
   // cartItem: IcartItem;
   categoryOptions = [
-    {name: 'All products', value: null},
+    // {name: 'All products', value: null},
     {name: 'Milk & Eggs', value: 5},
     {name: 'Vegetables & Fruits', value: 6},
     {name: "Meat & Fish", value: 7},
@@ -29,7 +29,8 @@ export class AdminProductsComponent implements OnInit {
   constructor(private productsService: ProductsService, private uploadService: UploadService, public dialog: MatDialog, private _updateProductsService: UpdateProductsService) { }
 
   ngOnInit() {
-    this.getAllProducts();
+    // this.getAllProducts();
+    this.getAllProductsByCategoryId(5);
 
     this.productsService.needToRefetchSubject.subscribe((value) => {
       if (value) this.getAllProducts();

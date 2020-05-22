@@ -8,7 +8,7 @@
 
     <img mat-card-image class="dialog-img-style" src="{{data.image_path}}" id="{{data.product_id}}" alt="product Photo">
 
-    <div> &#8362;{{data.price}} </div>
+    <div> &#8362;{{ data.price }} </div>
     <div> {{data.product_name}} </div>
     <!-- <div>need to add description</div> -->
 
@@ -23,7 +23,7 @@
       <button mat-raised-button class="mat-button toggle-more" (click)="toggleMore()">+</button>
     </div>
 
-    <button mat-button (click)="addToCart(data)">Add to cart</button>
+    <button mat-raised-button color="primary" cdkFocusInitial (click)="addToCart(data)">Add to cart</button>
   </div>
 
 </div>

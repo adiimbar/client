@@ -4,7 +4,7 @@
         <div class="products-menu">
           <button mat-button *ngFor="let category of categoryOptions" (click)="categoryButton(category.value)">{{category.name}}</button>
           <span style="right: 10px;">
-            <input [(ngModel)]="itemSearchValue" type="text" placeholder="Search a product">
+            <input [(ngModel)]="itemSearchValue" class="product-search-style" type="text" placeholder="Search a product">
             <button mat-button (click)="searchItemButton()">Search</button>
           </span>
 
